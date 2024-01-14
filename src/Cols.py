@@ -1,6 +1,6 @@
 """
 File by Sathiya Narayanan Venkatesan
-This file is our cols class, which will have all the row properties
+This file is our cols class, which will have all the column properties
 """
 
 import re
