@@ -27,7 +27,7 @@ class Data:
         :param src: the csv file to be processed
         :return: None
         """
-        for row in csv("../data/auto93.csv"):
+        for row in csv(src):
             self.add(row)
 
     def add(self, t):
@@ -44,37 +44,121 @@ class Data:
         else:
             self.rows.append(self.cols.add(row))
 
-    def stats(self):
-        pass
+    def stats(self, cols="y", fun="mid", ndivs=2):
+        """
+        Computes the requested stats for whichever column requested
+        :param cols: A str that is the cols we would like stats on
+        :param fun: A str that determines which stat you would like, mean/standard deviation
+        :param ndivs: An int giving us the number of precsion points in our returned stats
+        :return: A dictionary that holds column names as keys, and stat values as values
+        """
+        u = {}  # a dictionary to be returned
+
+        if cols == "y":
+            if fun == "mid":
+                for col in self.cols.y:
+                    #  Remember, col here is either a NUM or SYM object
+                    u[col.txt] = round(col.mid, ndivs)
+            elif fun == "div":
+                for col in self.cols.y:
+                    u[col.txt] = round(col.div, ndivs)
+            elif fun == "small":
+                pass #  doesn't need to be implemented yet
+        elif cols == "x":
+            if fun == "mid":
+                for col in self.cols.x:
+                    #  Remember, col here is either a NUM or SYM object
+                    u[col.txt] = round(col.mid, ndivs)
+            elif fun == "div":
+                for col in self.cols.x:
+                    u[col.txt] = round(col.div, ndivs)
+            elif fun == "small":
+                pass #  doesn't need to be implemented yet
+        elif cols == "all":
+            if fun == "mid":
+                for col in self.cols.all:
+                    #  Remember, col here is either a NUM or SYM object
+                    u[col.txt] = round(col.mid, ndivs)
+            elif fun == "div":
+                for col in self.cols.all:
+                    u[col.txt] = round(col.div, ndivs)
+            elif fun == "small":
+                pass #  doesn't need to be implemented yet
+        else:
+            #  This is our strange scenario where the str input in lets say an individual column
+            if fun == "mid":
+                for col in self.cols.all:
+                    if col.txt in cols:
+                        #  Remember, col here is either a NUM or SYM object
+                        u[col.txt] = round(col.mid, ndivs)
+            elif fun == "div":
+                for col in self.cols.all:
+                    if col.txt in cols:
+                        u[col.txt] = round(col.div, ndivs)
+            elif fun == "small":
+                pass #  doesn't need to be implemented yet
+        return u
 
     def mid(self, cols):
         """
         Function returns the means and modes of all or a selection of columns
-        :param cols: A selection of columns if you wouldn't like to see all of them
+        :param cols: A str that tells the function which columns to calculate on
         :return: Return an array that represents the means/modes of whatever columns were selected
         """
-        u = [] ## our table
-        if cols is not None:
-            for x in cols:
-                u.append(u.mid)  # u.mid should automatically return either sym.mid or num.mid
+        u = []  # an array to be returned
+
+        if cols == "y":
+            for col in self.cols.y:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.mid)
+
+        elif cols == "x":
+            for col in self.cols.x:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.mid)
+
+        elif cols == "all":
+            for col in self.cols.all:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.mid)
+
         else:
-            # else we just go through all of self.cols
-            for x in self.cols:
-                u.append(u.mid)
-        return Row(u)  # returning an array of means/modes
+            #  This is our strange scenario where the str input in lets say an individual column
+            for col in self.cols.all:
+                if col.txt in cols:
+                    #  Remember, col here is either a NUM or SYM object
+                    u.append(col.mid)
+
+        return Row(u)
 
     def div(self, cols):
         """
-        Function returns the standard deviation or entropy of all, or a selection of columns
-        :param cols: A selection of columns if you wouldn't like to see all of them
-        :return: Return an array that represents the sd/entropy of whatever columns were selected
+        Function returns the entropy/standard deviation of all or a selection of columns
+        :param cols: A str that tells the function which columns to calculate on
+        :return: Return an array that represents the sds/entropys of whatever columns were selected
         """
-        u = []  ## our table
-        if cols is not None:
-            for x in cols:
-                u.append(u.div)  # u.mid should automatically return either sym.div or num.div
+        u = []  # an array to be returned
+
+        if cols == "y":
+            for col in self.cols.y:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.div)
+
+        elif cols == "x":
+            for col in self.cols.x:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.div)
+
+        elif cols == "all":
+            for col in self.cols.all:
+                #  Remember, col here is either a NUM or SYM object
+                u.append(col.div)
+
         else:
-            # else we just go through all of self.cols
-            for x in self.cols:
-                u.append(u.div)
-        return Row(u)  # returning an array of sds/entropys
+            #  This is our strange scenario where the str input in lets say an individual column
+            for col in self.cols.all:
+                if col.txt in cols:
+                    #  Remember, col here is either a NUM or SYM object
+                    u.append(col.div)
+
+        return Row(u)
