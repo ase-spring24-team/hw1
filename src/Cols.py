@@ -1,29 +1,42 @@
+"""
+File by Sathiya Narayanan Venkatesan
+This file is our cols class, which will have all the column properties
+"""
+
+import re
 import Num
 import Sym
 
 class Cols:
     def __init__(self, row):
+        """
+        Initialization function for the cols class
+        Sets up columns
+        :param row: the column names in a the form of a array
+        """
         self.x = []
         self.y = []
         self.all = []
         self.klass 
-        self.col 
-        for key, value in row:
-            if value.isupper():
-                col = Num(value, key)
-            else:
-                col = Sym(value, key)
+        self.names = row.cells
+        for idx, cell in enumerate(row.cells):
+            col = Num(cell,idx) if re.match("^[A-Z]",cell) else Sym(cell,idx)
             self.all.append(col)
-            if not value.endswith("X"):
-                if value.endswith("!"):
+            if not cell.endswith("X"):
+                if cell.endswith("!"):
                     klass = col
-                if value.endswith("!") or value.endswith("+") or value.endswith("-"):
-                    self.x[key] = col
+                if cell.endswith("!") or cell.endswith("+") or cell.endswith("-"):
+                    self.x[idx] = col
                 else:
-                    self.y[key] = col
+                    self.y[idx] = col
     
     def add(self, row):
+        """
+        Function that adds rows 
+        :param row: row is the row to be added and should be passed as an Row object
+        :return: None
+        """
         for _, cols in enumerate([self.x, self.y]):
-            for _, col in enumerate(cols):
+            for col in cols:
                 col.add(row.cells[col.at])
             
