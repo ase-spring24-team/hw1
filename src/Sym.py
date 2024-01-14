@@ -1,6 +1,5 @@
 import math
 
-
 class Sym:
     def __init__(self, s=" ", n=0):
         self.txt = s

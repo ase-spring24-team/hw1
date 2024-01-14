@@ -3,7 +3,7 @@ File by Samuel Kwiatkowski-Martin
 This file is our data class, which will contain and process columns and rows
 """
 from Row import Row # Imports the Row class from the Row file
-from Utility import csv # Imports the csv function from utility
+from utility import csv # Imports the csv function from utility
 from Cols import Cols  # Imports the Cols class
 from Sym import Sym
 from Num import Num
