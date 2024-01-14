@@ -26,9 +26,9 @@ class Cols:
                 if cell.endswith("!"):
                     klass = col
                 if cell.endswith("!") or cell.endswith("+") or cell.endswith("-"):
-                    self.x[idx] = col
+                    self.x.append(col)
                 else:
-                    self.y[idx] = col
+                    self.y.append(col)
     
     def add(self, row):
         """
@@ -39,4 +39,6 @@ class Cols:
         for _, cols in enumerate([self.x, self.y]):
             for col in cols:
                 col.add(row.cells[col.at])
+        
+        return row
             
