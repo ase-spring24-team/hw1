@@ -26,9 +26,9 @@ class Cols:
                 if cell.endswith("!"):
                     klass = col
                 if cell.endswith("!") or cell.endswith("+") or cell.endswith("-"):
-                    self.x.append(col)
-                else:
                     self.y.append(col)
+                else:
+                    self.x.append(col)
     
     def add(self, row):
         """
