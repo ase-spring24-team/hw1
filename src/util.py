@@ -6,6 +6,8 @@ lines 6-18 are from professor Menzies
 import re
 import ast
 import sys
+import random
+import math
 import fileinput
 
 
@@ -45,3 +47,15 @@ def cli(t):
                 v = "False" if v == "True" else ("True" if v == "False" else sys.argv[i+1])
                 t[k] = coerce(v)
     return t
+
+def norm(mu = 0, sd = 1):
+    R = random.random
+    return mu + sd * math.sqrt(-2 * math.log(R())) * math.cos(2 * math.pi * R())
+
+def rnd(n, ndecs = 2):
+    if type(n) != int and type(n) != float:
+        return n
+    if math.floor(n) == n:
+        return n
+    mult = 10 ** ndecs
+    return math.floor(n * mult + 0.5) / mult
