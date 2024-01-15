@@ -4,8 +4,8 @@ This file is our cols class, which will have all the column properties
 """
 
 import re
-import Num
-import Sym
+from Num import Num
+from Sym import Sym
 
 class Cols:
     def __init__(self, row):
@@ -17,7 +17,7 @@ class Cols:
         self.x = []
         self.y = []
         self.all = []
-        self.klass 
+        self.klass = None
         self.names = row.cells
         for idx, cell in enumerate(row.cells):
             col = Num(cell,idx) if re.match("^[A-Z]",cell) else Sym(cell,idx)

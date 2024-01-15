@@ -7,7 +7,7 @@ class Sym:
         self.n = 0
         self.has = {}
         self.mode = None
-        most = 0
+        self.most = 0
 
     def add(self, x):
         if x != "?":

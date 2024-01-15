@@ -58,30 +58,30 @@ class Data:
             if fun == "mid":
                 for col in self.cols.y:
                     #  Remember, col here is either a NUM or SYM object
-                    u[col.txt] = round(col.mid, ndivs)
+                    u[col.txt] = round(col.mid(), ndivs)
             elif fun == "div":
                 for col in self.cols.y:
-                    u[col.txt] = round(col.div, ndivs)
+                    u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
                 pass #  doesn't need to be implemented yet
         elif cols == "x":
             if fun == "mid":
                 for col in self.cols.x:
                     #  Remember, col here is either a NUM or SYM object
-                    u[col.txt] = round(col.mid, ndivs)
+                    u[col.txt] = round(col.mid(), ndivs)
             elif fun == "div":
                 for col in self.cols.x:
-                    u[col.txt] = round(col.div, ndivs)
+                    u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
                 pass #  doesn't need to be implemented yet
         elif cols == "all":
             if fun == "mid":
                 for col in self.cols.all:
                     #  Remember, col here is either a NUM or SYM object
-                    u[col.txt] = round(col.mid, ndivs)
+                    u[col.txt] = round(col.mid(), ndivs)
             elif fun == "div":
                 for col in self.cols.all:
-                    u[col.txt] = round(col.div, ndivs)
+                    u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
                 pass #  doesn't need to be implemented yet
         else:
@@ -90,11 +90,11 @@ class Data:
                 for col in self.cols.all:
                     if col.txt in cols:
                         #  Remember, col here is either a NUM or SYM object
-                        u[col.txt] = round(col.mid, ndivs)
+                        u[col.txt] = round(col.mid(), ndivs)
             elif fun == "div":
                 for col in self.cols.all:
                     if col.txt in cols:
-                        u[col.txt] = round(col.div, ndivs)
+                        u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
                 pass #  doesn't need to be implemented yet
         return u

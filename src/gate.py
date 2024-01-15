@@ -12,11 +12,21 @@ OPTIONS:
 """
 
 import util as l
+from Data import Data
+
+def run(the):
+    if the.help or the.test == 'help':
+      print(the.__help)
+      exit(0)
+    
+    data = Data(the.file)
+
+    if the.test == 'stats':
+      print(data.stats(cols='all'))
 
 
-def run(x):
-    print(x)
+
 
 
 the = l.settings(__doc__)
-run(l.cli(the).test)
+run(l.cli(the))

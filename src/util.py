@@ -44,7 +44,4 @@ def cli(t):
             if s == "-" + k[0] or s == "--" + k:
                 v = "False" if v == "True" else ("True" if v == "False" else sys.argv[i+1])
                 t[k] = coerce(v)
-    if t.help:
-      print(t.__help)
-      exit(0)
     return t
