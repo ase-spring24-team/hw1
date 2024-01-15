@@ -5,8 +5,7 @@ This file is our data class, which will contain and process columns and rows
 from Row import Row # Imports the Row class from the Row file
 from util import csv # Imports the csv function from util
 from Cols import Cols  # Imports the Cols class
-from Sym import Sym
-from Num import Num
+
 
 class Data:
     def __init__(self, src):
@@ -83,7 +82,7 @@ class Data:
                 for col in self.cols.all:
                     u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
-                pass #  doesn't need to be implemented yet
+                pass  # doesn't need to be implemented yet
         else:
             #  This is our strange scenario where the str input in lets say an individual column
             if fun == "mid":
@@ -96,7 +95,7 @@ class Data:
                     if col.txt in cols:
                         u[col.txt] = round(col.div(), ndivs)
             elif fun == "small":
-                pass #  doesn't need to be implemented yet
+                pass  # doesn't need to be implemented yet
         return u
 
     def mid(self, cols):
