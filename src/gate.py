@@ -11,7 +11,7 @@ OPTIONS:
     -t --test   start up action                 = help
 """
 
-import utility as l
+import util as l
 
 
 def run(x):

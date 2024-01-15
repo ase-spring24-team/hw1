@@ -1,6 +1,6 @@
 """
 File created by Samuel Kwiatkowski-Martin
-For utility purposes such as reading in from a csv file
+For util purposes such as reading in from a csv file
 lines 6-18 are from professor Menzies
 """
 import re
