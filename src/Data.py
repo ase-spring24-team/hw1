@@ -52,7 +52,7 @@ class Data:
         :return: A dictionary that holds column names as keys, and stat values as values
         """
         u = {}  # a dictionary to be returned
-
+        u[".N"] = len(self.rows) - 1
         if cols == "y":
             if fun == "mid":
                 for col in self.cols.y:
