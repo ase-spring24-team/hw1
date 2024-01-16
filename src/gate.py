@@ -1,6 +1,4 @@
 """
-HW: week 2
-
 OPTIONS:
     -c --cohen  small effect size               = .35
     -f --file   csv data file name              = ../data/auto93.csv
