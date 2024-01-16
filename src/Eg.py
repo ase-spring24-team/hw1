@@ -49,6 +49,14 @@ def num():
     print(rnd(mu, 3), rnd(sd, 3), mu, sd)
     return 9.9 < mu and mu < 10.2 and 3 < sd and sd < 5
 
+def num_2():
+    e = Num()
+    for _ in range(500):
+        e.add(norm(10))
+    mu, sd = e.mid(), e.div()
+    print(rnd(mu, 3), rnd(sd, 3), mu, sd)
+    return 9.9 < mu and mu < 10.2 and 0.9 < sd and sd < 1.2
+
 def sym():
     s = Sym()
     l = [1,1,1,1,2,2,3]
@@ -97,12 +105,22 @@ def oo():
     print(l.o(d))
     return l.o(d) == "dict{a:1 b:2 c:3 d:4}" 
 
+def oo_2():
+    d = {"a":"x","b":"y","c":"z"}
+    print(d)
+    print(l.o(d))
+    return l.o(d) == "dict{a:x b:y c:z}" 
+
 def row():
     """
     Tests the row class
     """
     print("[1, 2, 3] == " + str(Row([1,2,3]).cells))
-    return "[1, 2, 3] == " + str(Row([1,2,3]).cells)
+    return "[1, 2, 3]" == str(Row([1,2,3]).cells)
+
+def row_2():
+    print("[5, 4, 3] == " + str(Row([5, 4, 3]).cells))
+    return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
