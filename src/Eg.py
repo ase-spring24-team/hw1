@@ -24,11 +24,11 @@ def egs():
     """
     Prints out all the different tests we can run
     """
-    test_names = ["all", "egs", "help", "sym", "num", "csv", "data", "stats"]
+    test_names = ["all", "egs", "help", "sym", "num", "csv", "data", "stats", "oo"]
     for test_name in test_names:
-        print("lua gat.lua -t " + test_name)
+        print("python gate.py -t " + test_name)
 
-def data(the):
+def data():
     n = 0
     d = Data(the.file)
     for i, row in enumerate(d.rows):
@@ -38,8 +38,16 @@ def data(the):
     l.oo(d.cols.x[0])
     return n == 32
 
+def oo():
+    d = {"a":1,"b":2,"c":3,"d":4}
+    print(d)
+    print(l.o(d))
+    return l.o(d) == "dict{a:1 b:2 c:3 d:4}" 
+
 
 stats()
 print(num())
 egs()
-print(data(l.SLOTS({"file":"../data/auto93.csv"})))
+the = l.SLOTS({"file":"../data/auto93.csv"})
+print(data())
+oo()
