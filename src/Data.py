@@ -39,7 +39,7 @@ class Data:
         if self.cols is None:
             self.cols = Cols(row)
             # the following is not included in his lua code, but I believe we need it
-            self.rows.append((self.cols))
+            #self.rows.append((self.cols))
         else:
             self.rows.append(self.cols.add(row))
 
