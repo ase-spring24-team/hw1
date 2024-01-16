@@ -11,7 +11,7 @@ OPTIONS:
 
 import util as l
 from Data import Data
-import Eg as eg
+import tests as eg
 import random
 
 def run(the):
