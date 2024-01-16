@@ -10,6 +10,8 @@ from util import norm, rnd
 import util as l
 
 tests = {}
+the = l.SLOTS({"file":"../data/auto93.csv", "help": ""}) #Will be overridden when the is loaded by gate.py
+
 
 def all():
     bad = 0
@@ -95,10 +97,6 @@ def oo():
     print(l.o(d))
     return l.o(d) == "dict{a:1 b:2 c:3 d:4}" 
 
-
-the = l.SLOTS({"file":"../data/auto93.csv", "help": "somehelp"})
-
-
 def row():
     """
     Tests the row class
@@ -111,11 +109,14 @@ for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
         tests[k] = v
 
-stats()
-print(num())
-egs()
-the = l.SLOTS({"file":"../data/auto93.csv"})
-print(data())
-oo()
+def _load(t):
+    the = t
 
-all()
+def _run(t_name):
+    if t_name in tests:
+        return tests[t_name]()
+    else:
+        return None
+
+if __name__ == '__main__':
+    all()

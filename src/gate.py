@@ -11,20 +11,18 @@ OPTIONS:
 
 import util as l
 from Data import Data
+import Eg as eg
+import random
 
 def run(the):
-    if the.help or the.test == 'help':
+    if the.help:
       print(the.__help)
       exit(0)
-    
-    data = Data(the.file)
+    eg._load(the)
+    random.seed(the.seed)
+    oops = False if eg._run(the.test) else True
 
-    if the.test == 'stats':
-      print(data.stats(cols='all'))
-
-
-
-
+    exit(oops)
 
 the = l.settings(__doc__)
 run(l.cli(the))
