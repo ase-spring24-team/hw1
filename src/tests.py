@@ -10,7 +10,7 @@ from util import norm, rnd
 import util as l
 
 tests = {}
-the = l.SLOTS({"file":"../data/auto93.csv", "help": ""}) #Will be overridden when the is loaded by gate.py
+the = l.SLOTS({"file":"../data/auto93.csv", "__help": ""}) #Will be overridden when the is loaded by gate.py
 
 
 def all():
@@ -96,7 +96,7 @@ def csv():
     return n == 32
 
 def help():
-    print(the.help)
+    print(the.__help)
     return True
 
 def oo():
@@ -128,6 +128,7 @@ for (k, v) in list(locals().items()):
         tests[k] = v
 
 def _load(t):
+    global the
     the = t
 
 def _run(t_name):

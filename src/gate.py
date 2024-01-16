@@ -1,4 +1,13 @@
 """
+Automated Software Engineering - Homework Week 2
+by:
+    Sai Raj Thirumalai
+    Sam Kwiatkowski-Martin
+    Sathiya Narayanan Venkatesan
+
+USAGE:
+  python gate.py [OPTIONS]
+
 OPTIONS:
     -c --cohen  small effect size               = .35
     -f --file   csv data file name              = ../data/auto93.csv
