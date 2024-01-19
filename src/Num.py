@@ -15,9 +15,9 @@ class Num:
         self.n = 0
         self.mu = 0
         self.m2 = 0
-        self.hi = -1e30
-        self.lo = 1e30
-        heaven = 0 if s.endswith("-") else 1
+        self.hi = -1E30
+        self.lo = 1E30
+        self.heaven = 0 if s.endswith("-") else 1
 
     def add(self, x):
         """
@@ -60,4 +60,11 @@ class Num:
         if x == "?":
             return x
         else:
-            (x - self.lo) / (self.hi - self.lo + 1e-30)
+            (x - self.lo) / (self.hi - self.lo + 1E-30)
+
+    # Likelihood
+    def like(self, x, _):
+        mu, sd = self.mid(), (self.div + 1E-30)
+        nom = 2.718 ** (-.5*(x - mu)**2 / (sd **2))
+        denom = (sd*2.5 + 1E-30)
+        return nom/denom

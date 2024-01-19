@@ -52,3 +52,8 @@ class Sym:
         for _, v in self.has.items():
             e -= v / self.n * math.log(v / self.n, 2)
         return e
+    
+    def like(self, x, prior):
+        global the
+        h = self.has[x] if x in self.has else 0
+        return (h + the.m * prior)/ (self.n + the.m)
