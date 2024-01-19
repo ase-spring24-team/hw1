@@ -122,6 +122,21 @@ def row_2():
     print("[5, 4, 3] == " + str(Row([5, 4, 3]).cells))
     return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
+def learn(data, row, my):
+    my.n += 1
+    kl = row.cells[data.cols.klass.at]
+    if my.n > 0:
+        my.tries += 1
+        my.acc += 1 if kl == row.likes(my.datas) else 0
+    my.datas.setdefault(kl, Data.new(data.cols.names))
+    my.datas[kl].add(row)
+
+def bayes():
+    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
+    print(wme.acc/(wme.tries))
+    return wme.acc/(wme.tries) > .72
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -139,3 +154,5 @@ def _run(t_name):
 
 if __name__ == '__main__':
     all()
+
+bayes()
