@@ -8,7 +8,7 @@ from Cols import Cols  # Imports the Cols class
 
 
 class Data:
-    def __init__(self, src):
+    def __init__(self, src, func = None):
         """
         Initialization function for the data class
         Sets up rows and columns and calls to read in required values
@@ -18,18 +18,20 @@ class Data:
         self.cols = None
         if isinstance(src, str):
             # checks if src is a string
-            self.process_file(src)
-
-    def process_file(self, src):
+            self.process_file(src, func)
+        ## else the scenario where source is a table already
+        else:
+            self.add(src, func)
+    def process_file(self, src, func):
         """
         Function that process the src file
         :param src: the csv file to be processed
         :return: None
         """
         for row in csv(src):
-            self.add(row)
+            self.add(row, func)
 
-    def add(self, t):
+    def add(self, t, func):
         """
         Function that adds rows and columns from the read csv
         :param t: t is the row to be added and should be passed as an array
@@ -41,6 +43,9 @@ class Data:
             # the following is not included in his lua code, but I believe we need it
             #self.rows.append((self.cols))
         else:
+            if func is not None:
+                # if the lambda function was passed to data
+                func(self, row)
             self.rows.append(self.cols.add(row))
 
     def stats(self, cols="y", fun="mid", ndivs=2):
