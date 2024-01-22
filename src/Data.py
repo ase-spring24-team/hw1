@@ -8,11 +8,12 @@ from Cols import Cols  # Imports the Cols class
 
 
 class Data:
-    def __init__(self, src, func = None):
+    def __init__(self, src, func=None):
         """
         Initialization function for the data class
         Sets up rows and columns and calls to read in required values
         :param src: Either the csv filename or a list of rows
+        :param func: An anonymous function, likely the function learn as of right now
         """
         self.rows = []
         self.cols = None
@@ -22,22 +23,28 @@ class Data:
         ## else the scenario where source is a table already
         else:
             self.add(src, func)
-    def process_file(self, src, func):
+    def process_file(self, src, func=None):
         """
         Function that process the src file
         :param src: the csv file to be processed
+        :param func: The anonymous function to continue being passed through
         :return: None
         """
         for row in csv(src):
             self.add(row, func)
 
-    def add(self, t, func):
+    def add(self, t, func=None):
         """
         Function that adds rows and columns from the read csv
         :param t: t is the row to be added and should be passed as an array
+        :param func: The anonymous function to be ran on each row before being added to a col
         :return: None
         """
-        row = Row(t)
+        #  must handle case if t is magically already a row object.. could happen bc of learn func
+        if isinstance(t,Row):
+            row = t
+        else:
+            row = Row(t)
         if self.cols is None:
             self.cols = Cols(row)
             # the following is not included in his lua code, but I believe we need it

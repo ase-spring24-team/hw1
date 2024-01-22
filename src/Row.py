@@ -2,8 +2,7 @@
 File by Samuel Kwiatkowski-Martin
 This file is our row class
 """
-
-
+import math
 class Row:
     """
     Initializes the row using a passed array
@@ -23,3 +22,20 @@ class Row:
             if most is None or tmp > most:
                 most, out = tmp, k
         return out, most
+    def like(self, data, n, nHypotheses):
+        """
+        Checks how much ROW like 'self'.
+        :param data: The data class we are checking against to see how much the new row is like
+        :param n: The total number of data points so far
+        :param nHypotheses: The total number of classification options
+        """
+        prior = (len(data.rows) + the.k) / (n + the.k*nHypotheses)
+        out = math.log(prior)
+        for col in data.cols.x:
+            #  where each col is either a col or sym object
+            v = self.cells[col.at]
+            if v != "?":
+                #  if the column is supposed to be processed then
+                inc = col.like(v,prior)
+                out = out + math.log(inc)
+        return math.exp(1)**out
