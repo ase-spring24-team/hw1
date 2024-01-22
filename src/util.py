@@ -9,6 +9,7 @@ import sys
 import random
 import math
 import fileinput
+from the import SLOTS
 
 
 def coerce(val):
@@ -24,11 +25,6 @@ def csv(file="-"):
             line = re.sub(r'([\n\t\r"\' ]|#.*)', "", line)
             if line:
                 yield [coerce(x) for x in line.split(",")]
-
-
-class SLOTS(dict):
-    __getattr__ = dict.get
-    __setattr__ = dict.__setitem__
 
 
 def settings(help_doc=__doc__):

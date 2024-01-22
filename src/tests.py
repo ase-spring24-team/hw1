@@ -8,10 +8,9 @@ from Num import Num
 from Sym import Sym
 from util import norm, rnd
 import util as l
+from the import the, SLOTS
 
 tests = {}
-the = l.SLOTS({"file":"../data/auto93.csv", "__help": ""}) #Will be overridden when the is loaded by gate.py
-
 
 def all():
     bad = 0
@@ -142,10 +141,6 @@ for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
         tests[k] = v
 
-def _load(t):
-    global the
-    the = t
-
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -153,6 +148,6 @@ def _run(t_name):
         return None
 
 if __name__ == '__main__':
-    all()
-
-bayes()
+    #all()
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
+    bayes()

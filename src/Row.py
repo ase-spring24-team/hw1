@@ -2,7 +2,8 @@
 File by Samuel Kwiatkowski-Martin
 This file is our row class
 """
-
+import math
+from the import the
 
 class Row:
     """

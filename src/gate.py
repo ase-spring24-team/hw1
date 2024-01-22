@@ -19,15 +19,15 @@ OPTIONS:
 """
 
 import util as l
-from Data import Data
 import tests as eg
 import random
+from the import set_the
 
 def run(the):
     if the.help:
       print(the.__help)
       exit(0)
-    eg._load(the)
+    set_the(the)
     random.seed(the.seed)
     oops = False if eg._run(the.test) else True
 
