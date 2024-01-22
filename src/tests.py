@@ -213,6 +213,7 @@ def km():
     """
     This function tests soybean.csv by changing around the hyperparameters k and m
     """
+    best_acc = best_k = best_m = -1
     print(f"Accuracy,K,M")
     for k in range(4):
         for m in range(4):
@@ -222,6 +223,36 @@ def km():
             wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0})
             Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
             print(f"{round(wme.acc / wme.tries, 2)},{k},{m}")
+            if best_acc < (wme.acc / wme.tries):
+                best_acc = (wme.acc / wme.tries)
+                best_k = k
+                best_m = m
+    print("BEST,,")
+    print(f"{round(best_acc,2)},{best_k},{best_m}")
+    return best_k ==2 and best_m == 1
+
+def km_2():
+    """
+    This function tests soybean.csv by changing around the hyperparameters k and m
+    """
+    best_acc = best_k = best_m = -1
+    print(f"Accuracy,K,M")
+    for k in range(4):
+        for m in range(4):
+            #  loop through all the hyperparameters
+            the.k = k
+            the.m = m
+            wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0})
+            Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
+            print(f"{round(wme.acc / wme.tries, 2)},{k},{m}")
+            if best_acc < (wme.acc / wme.tries):
+                best_acc = (wme.acc / wme.tries)
+                best_k = k
+                best_m = m
+    print("BEST,,")
+    print(f"{round(best_acc,2)},{best_k},{best_m}")
+    return best_acc > 0.64
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
