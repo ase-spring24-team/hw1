@@ -163,13 +163,23 @@ for (k, v) in list(locals().items()):
 def learn(data, row, my):
     my.n += 1
     kl = row.cells[data.cols.klass.at]
+    learned = False
     if my.n > 0:
         my.tries += 1
         my.acc += 1 if kl == row.likes(my.datas) else 0
         my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
+        learned = True
     my.datas.setdefault(kl, Data(data.cols.names))
+    test_learn(learned)
     my.datas[kl].add(row)
 
+def test_learn(learned):
+    """
+    Test function to make sure that learn doesn't add data before it runs likes on the row
+    that is trying to be added
+    """
+    assert learned
+    # will throw error if somehow the data gets added before being learned on
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -180,5 +190,5 @@ if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
     ascii_table("../data/soybean.csv")
-    km()
-    #bayes()
+    #km()
+    bayes()
