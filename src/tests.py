@@ -125,13 +125,13 @@ def row_2():
 def bayes():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
-    print(wme.acc/(wme.tries))
+    print("Accuracy:", wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .64 #.72
 
 def bayes_2():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
-    print(wme.acc/(wme.tries))
+    print("Accuracy:", wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .8
 
 def ascii_table(file_name = None):
