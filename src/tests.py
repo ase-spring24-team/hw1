@@ -186,6 +186,7 @@ def ascii_table_diabetes():
     print("Class Name, number of rows, percetange")
     for key, values in datas.items():
         print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+    print("Total,,")
     print("Number of classes,", len(datas), ",")
     print("Total number of rows,", wme.n, ",")
     return True
@@ -197,6 +198,7 @@ def ascii_table_soybean():
     print("Class Name, number of rows, percetange")
     for key, values in datas.items():
         print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+    print("Total,,")
     print("Number of classes,", len(datas), ",")
     print("Total number of rows,", wme.n, ",")
     return True
