@@ -8,7 +8,7 @@ from Num import Num
 from Sym import Sym
 from util import norm, rnd
 import util as l
-from the import the, SLOTS
+from the import THE, the, SLOTS
 
 tests = {}
 
@@ -128,6 +128,12 @@ def bayes():
     print(wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .64 #.72
 
+def bayes_2():
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
+    print(wme.acc/(wme.tries))
+    return wme.acc/(wme.tries) > .8
+
 def ascii_table(file_name = None):
     if not file_name: 
         file_name = the.file
@@ -139,6 +145,37 @@ def ascii_table(file_name = None):
     print("Class Name, number of rows, percetange")
     for key, values in datas.items():
         print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+    return True
+
+def ascii_table_diabetes():
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
+    datas = wme.datas 
+    print("Class Name, number of rows, percetange")
+    for key, values in datas.items():
+        print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+    print("Number of classes,", len(datas), ",")
+    print("Total number of rows,", wme.n, ",")
+    return True
+
+def ascii_table_soybean():
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
+    datas = wme.datas 
+    print("Class Name, number of rows, percetange")
+    for key, values in datas.items():
+        print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+    print("Number of classes,", len(datas), ",")
+    print("Total number of rows,", wme.n, ",")
+    return True
+
+def global_the():
+    t = THE()
+    t._set(SLOTS({"a":1, "b": "xyz", "c":True}))
+    print({"a":t.a, "b": t.b, "c":t.c})
+    t.a = 2
+    print({"a":t.a, "b": t.b, "c":t.c})
+    return t.a == 2 and t.b == "xyz" and t.c == True
 
 def km():
     """
