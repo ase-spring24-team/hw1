@@ -122,7 +122,7 @@ def row_2():
     print("[5, 4, 3] == " + str(Row([5, 4, 3]).cells))
     return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
-def test_sym_like():
+def sym_like():
     """
     Tests the like function of Sym class
     """
@@ -135,7 +135,7 @@ def test_sym_like():
     return like > 0.36
 
 
-def test_num_like():
+def num_like():
     """
     Tests the like function of Num class
     """
