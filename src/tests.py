@@ -123,7 +123,8 @@ def row_2():
     return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
 def bayes():
-    wme = _bayes("../data/diabetes.csv")
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
     print(wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .64 #.72
 
@@ -143,12 +144,6 @@ def learn(data, row, my):
         my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
     my.datas.setdefault(kl, Data(data.cols.names))
     my.datas[kl].add(row)
-
-def _bayes(src):
-    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
-    Data(src, lambda data, t: learn(data,t,wme))
-    return wme
-
 
 def _run(t_name):
     if t_name in tests:
