@@ -21,17 +21,17 @@ OPTIONS:
 import util as l
 import tests as eg
 import random
-from the import set_the
+from the import the
 
-def run(the):
-    if the.help:
-      print(the.__help)
+def run(_the):
+    if _the.help:
+      print(_the.__help)
       exit(0)
-    set_the(the)
-    random.seed(the.seed)
-    oops = False if eg._run(the.test) else True
+    the._set(_the)
+    random.seed(_the.seed)
+    oops = False if eg._run(_the.test) else True
 
     exit(oops)
 
-the = l.settings(__doc__)
-run(l.cli(the))
+t = l.settings(__doc__)
+run(l.cli(t))
