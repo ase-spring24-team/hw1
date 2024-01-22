@@ -24,3 +24,13 @@ class Row:
             if most is None or tmp > most:
                 most, out = tmp, k
         return out, most
+    
+    def like(self, data, n, nHypotheses):
+        prior = (len(data.rows) + the.k) / (n + the.k *nHypotheses)
+        out = math.log(prior)
+        for col in data.cols.x:
+            v = self.cells[col.at]
+            if v != "?":
+                inc = col.like(v, prior)
+                out = out + (math.log(inc) if inc != 0 else 0)
+        return math.exp(1) ** out
