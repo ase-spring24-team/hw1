@@ -128,6 +128,19 @@ def bayes():
     print(wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .64 #.72
 
+def ascii_table(file_name = None):
+    if not file_name: 
+        file_name = the.file
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data(file_name,lambda data, t: learn(data,t,wme))
+    datas = wme.datas 
+    print("Number of classes,", len(datas), ",")
+    print("Total number of rows,", wme.n, ",")
+    print("Class Name, number of rows, percetange")
+    for key, values in datas.items():
+        print(key,",", len(values.rows),",", len(values.rows) / wme.n)
+
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -154,4 +167,4 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
-    bayes()
+    ascii_table("../data/soybean.csv")
