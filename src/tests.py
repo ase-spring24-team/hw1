@@ -122,6 +122,32 @@ def row_2():
     print("[5, 4, 3] == " + str(Row([5, 4, 3]).cells))
     return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
+def test_sym_like():
+    """
+    Tests the like function of Sym class
+    """
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/weather.csv",lambda data, t: learn(data,t,wme))
+    data = wme.datas["no"]
+    prior = (len(data.rows) + the.k) / (wme.n)
+    like = data.cols.x[0].like("rainy", prior)
+    print("like - ",like)
+    return like > 0.36
+
+
+def test_num_like():
+    """
+    Tests the like function of Num class
+    """
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/weather.csv",lambda data, t: learn(data,t,wme))
+    data = wme.datas["yes"]
+    prior = (len(data.rows) + the.k) / (wme.n)
+    like = data.cols.x[1].like(70, prior)
+    print("like - ",like)
+    return like > 0.01
+
+
 def bayes():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
@@ -133,6 +159,12 @@ def bayes_2():
     Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
     print("Accuracy:", wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .8
+
+def bayes_3():
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
+    Data("../data/weather.csv",lambda data, t: learn(data,t,wme))
+    print(wme.acc/(wme.tries))
+    return wme.acc/(wme.tries) > .55
 
 def ascii_table(file_name = None):
     if not file_name: 
@@ -226,6 +258,7 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
-    ascii_table("../data/soybean.csv")
+    # ascii_table("../data/soybean.csv")
     #km()
-    bayes()
+    # bayes()
+    print(bayes_3())
