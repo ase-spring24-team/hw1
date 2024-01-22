@@ -26,7 +26,7 @@ class Row:
         return out, most
     
     def like(self, data, n, nHypotheses):
-        prior = (len(data.rows) + the.k) / (n + the.k *nHypotheses)
+        prior = (len(data.rows) + the.k) / (n + the.k * nHypotheses)
         out = math.log(prior)
         for col in data.cols.x:
             v = self.cells[col.at]
