@@ -258,7 +258,3 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
-    # ascii_table("../data/soybean.csv")
-    #km()
-    # bayes()
-    print(bayes_3())
