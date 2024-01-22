@@ -31,13 +31,13 @@ class Data:
         for row in csv(src):
             self.add(row, func)
 
-    def add(self, t, func):
+    def add(self, t, func = None):
         """
         Function that adds rows and columns from the read csv
         :param t: t is the row to be added and should be passed as an array
         :return: None
         """
-        row = Row(t)
+        row = t if hasattr(t, 'cells') else Row(t)
         if self.cols is None:
             self.cols = Cols(row)
             # the following is not included in his lua code, but I believe we need it

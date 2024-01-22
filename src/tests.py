@@ -127,11 +127,11 @@ def learn(data, row, my):
     if my.n > 0:
         my.tries += 1
         my.acc += 1 if kl == row.likes(my.datas) else 0
-    my.datas.setdefault(kl, Data.new(data.cols.names))
+    my.datas.setdefault(kl, Data(data.cols.names))
     my.datas[kl].add(row)
 
 def bayes():
-    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
     print(wme.acc/(wme.tries))
     return wme.acc/(wme.tries) > .72
