@@ -3,3 +3,4 @@
 
 # Default ignored folder
 *.pyc
+*.tmp*
