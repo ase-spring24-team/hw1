@@ -87,7 +87,7 @@ def data():
     l.oo(d.cols.x[0])
     return n == 32
 
-def csv(src):
+def csv(src = "../data/auto93.csv"):
     n = 0
     for i, t in enumerate(l.csv(src)):
         if i % 100 == 0:
@@ -122,15 +122,6 @@ def row_2():
     print("[5, 4, 3] == " + str(Row([5, 4, 3]).cells))
     return "[5, 4, 3]" == str(Row([5, 4, 3]).cells)
 
-def learn(data, row, my):
-    my["n"] += 1
-    kl = row.cells[data.cols.klass.at]
-    if my["n"] > 0:
-        my["tries"] += 1
-        my["acc"] += 1 if kl == row.likes(my["datas"]) else 0
-    my["datas"].setdefault(kl, Data(data.cols.names))
-    my["datas"][kl].add(row)
-
 def bayes():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
@@ -141,6 +132,18 @@ def bayes():
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
         tests[k] = v
+
+# -- Functions below this will not be loaded as a test
+
+def learn(data, row, my):
+    my.n += 1
+    kl = row.cells[data.cols.klass.at]
+    if my.n > 0:
+        my.tries += 1
+        my.acc += 1 if kl == row.likes(my.datas) else 0
+        my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
+    my.datas.setdefault(kl, Data(data.cols.names))
+    my.datas[kl].add(row)
 
 def _run(t_name):
     if t_name in tests:
