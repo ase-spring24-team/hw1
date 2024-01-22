@@ -4,6 +4,7 @@ This file is our Sym class, which will contain the Sym data
 """
 
 import math
+from the import the
 
 class Sym:
     def __init__(self, s=" ", n=0):
@@ -54,6 +55,5 @@ class Sym:
         return e
     
     def like(self, x, prior):
-        global the
         h = self.has[x] if x in self.has else 0
         return (h + the.m * prior)/ (self.n + the.m)

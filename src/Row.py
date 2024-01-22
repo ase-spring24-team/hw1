@@ -3,6 +3,7 @@ File by Samuel Kwiatkowski-Martin
 This file is our row class
 """
 import math
+from the import the
 class Row:
     """
     Initializes the row using a passed array
@@ -37,5 +38,5 @@ class Row:
             if v != "?":
                 #  if the column is supposed to be processed then
                 inc = col.like(v,prior)
-                out = out + math.log(inc)
+                out = out + (math.log(inc) if inc != 0 else 0)
         return math.exp(1)**out

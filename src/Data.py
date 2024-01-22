@@ -40,11 +40,7 @@ class Data:
         :param func: The anonymous function to be ran on each row before being added to a col
         :return: None
         """
-        #  must handle case if t is magically already a row object.. could happen bc of learn func
-        if isinstance(t,Row):
-            row = t
-        else:
-            row = Row(t)
+        row = t if hasattr(t, 'cells') else Row(t)
         if self.cols is None:
             self.cols = Cols(row)
             # the following is not included in his lua code, but I believe we need it

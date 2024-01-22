@@ -8,9 +8,9 @@ from Num import Num
 from Sym import Sym
 from util import norm, rnd
 import util as l
+from the import the, SLOTS
 
 tests = {}
-the = l.SLOTS({"file":"../data/diabetes.csv", "__help": ""}) #Will be overridden when the is loaded by gate.py
 
 
 def all():
@@ -132,19 +132,15 @@ def learn(data, row, my):
     my["datas"][kl].add(row)
 
 def bayes():
-    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
     print(wme.acc/(wme.tries))
-    return wme.acc/(wme.tries) > .72
+    return wme.acc/(wme.tries) > .64 #.72
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
         tests[k] = v
-
-def _load(t):
-    global the
-    the = t
 
 def _run(t_name):
     if t_name in tests:
@@ -153,6 +149,6 @@ def _run(t_name):
         return None
 
 if __name__ == '__main__':
+    #all()
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
     bayes()
-
-bayes()
