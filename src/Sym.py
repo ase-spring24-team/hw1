@@ -15,7 +15,7 @@ class Sym:
         """
         self.txt = s
         self.at = n
-        self.n = 0
+        self.n = 0 #  testing
         self.has = {}
         self.mode = None
         self.most = 0
@@ -56,4 +56,7 @@ class Sym:
     
     def like(self, x, prior):
         h = self.has[x] if x in self.has else 0
-        return (h + the.m * prior)/ (self.n + the.m)
+        if self.n == 0 and the.m == 0:
+            return 0
+        else:
+            return (h + the.m * prior)/ (self.n + the.m)

@@ -140,7 +140,19 @@ def ascii_table(file_name = None):
     for key, values in datas.items():
         print(key,",", len(values.rows),",", len(values.rows) / wme.n)
 
-
+def km():
+    """
+    This function tests soybean.csv by changing around the hyperparameters k and m
+    """
+    print(f"Accuracy,K,M")
+    for k in range(4):
+        for m in range(4):
+            #  loop through all the hyperparameters
+            the.k = k
+            the.m = m
+            wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0})
+            Data("../data/soybean.csv",lambda data, t: learn(data,t,wme))
+            print(f"{round(wme.acc / wme.tries, 2)},{k},{m}")
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -168,3 +180,5 @@ if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
     ascii_table("../data/soybean.csv")
+    km()
+    #bayes()
