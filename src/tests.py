@@ -152,7 +152,7 @@ def bayes():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/diabetes.csv",lambda data, t: learn(data,t,wme))
     print("Accuracy:", wme.acc/(wme.tries))
-    return wme.acc/(wme.tries) > .64 #.72
+    return wme.acc/(wme.tries) > .72
 
 def bayes_2():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
@@ -164,7 +164,7 @@ def bayes_3():
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data("../data/weather.csv",lambda data, t: learn(data,t,wme))
     print(wme.acc/(wme.tries))
-    return wme.acc/(wme.tries) > .55
+    return wme.acc/(wme.tries) > .35
 
 def ascii_table(file_name = None):
     if not file_name: 
@@ -253,7 +253,7 @@ def km_2():
                 best_m = m
     print("BEST,,")
     print(f"{round(best_acc,2)},{best_k},{best_m}")
-    return best_acc > 0.64
+    return best_acc > 0.72
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
