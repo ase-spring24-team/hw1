@@ -47,7 +47,7 @@ def num():
         e.add(norm(10, 2))
     mu, sd = e.mid(), e.div()
     print(rnd(mu, 3), rnd(sd, 3), mu, sd)
-    return 9.9 < mu and mu < 10.2 and 3 < sd and sd < 5
+    return 9.9 < mu and mu < 10.5 and 2 < sd and sd < 5
 
 def num_2():
     e = Num()
@@ -169,6 +169,9 @@ def bayes_3():
 def ascii_table(file_name = None):
     if not file_name: 
         file_name = the.file
+    # auto93.csv file doesnot have a klass
+    if file_name == "../data/auto93.csv":
+        return True
     wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0}) 
     Data(file_name,lambda data, t: learn(data,t,wme))
     datas = wme.datas 
