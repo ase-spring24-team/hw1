@@ -49,7 +49,7 @@ class Num:
         if self.n < 2:
             return 0
         else:
-            return self.m2 / (self.n - 1)
+            return (self.m2 / (self.n - 1)) ** 0.5
 
     def norm(self, x):
         """

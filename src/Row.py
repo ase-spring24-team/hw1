@@ -38,5 +38,5 @@ class Row:
             if v != "?":
                 #  if the column is supposed to be processed then
                 inc = col.like(v,prior)
-                out = out + (math.log(inc) if inc != 0 else 0)
+                out = out + (math.log(inc) if inc != 0 else float("-inf"))
         return math.exp(1)**out

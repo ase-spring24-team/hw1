@@ -268,7 +268,6 @@ def learn(data, row, my):
     learned = False
     if my.n > 0:
         my.tries += 1
-        my.acc += 1 if kl == row.likes(my.datas) else 0
         my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
         learned = True
     my.datas.setdefault(kl, Data(data.cols.names))
