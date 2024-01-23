@@ -33,6 +33,33 @@ To run all tests:
 python gate.py -t all
 ```
 
+## Homework Tasks
+### HW2
+#### Task 1
+To get the stats:
+```
+ python gate.py -f ../data/auto93.csv -t stats
+```
+### HW3
+#### Task 1
+To print the little ascii table:
+```
+python gate.py -f ../data/diabetes.csv -t ascii_table
+python gate.py -f ../data/soybean.csv -t ascii_table
+```
+#### Task 3
+To execute bayes on `diabetes.csv`:
+```
+python gate.py -t bayes
+```
+#### Task 4
+To explore low frequency settings on `soybean.csv`:
+```
+python gate.py -t km
+```
+- Recommended low frequency settings for `soybean.csv` are `k=2` and `m=1`, as they return the best accuracy of 85%.
+- Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
