@@ -194,6 +194,29 @@ class Data:
                 rest.append(row)
         return Data(best), Data(rest)
 
+    def top_X(self, rows, top_num, option_num):
+        """
+        Prints the top X number of row's independent variable values
+        :param rows: the shuffled rows object
+        :param top_num: the total number of rows to have their y values printed
+        :param option_num: just the num to be printedwws
+        """
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print(f"{option_num}. top{top_num}", end=' ')
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        for i in range(top_num):
+            print(f"Row {i + 1}", end=' ')
+            for j in range(len(i_var_indices)):
+                print(f"{rows[i_var_indices[j]]}", end=' ')
+            print()
+
     def gate(self, budget0, budget, some):
         """
         This function guesses, accesses, transforms the data, and then evaluates
@@ -201,18 +224,32 @@ class Data:
         :param budget: the number of rows to subsequently evaluate
         :param some: a constant float value to determine how many rows to place in best versus rest
         """
+        stats = []
+        bests = []
         rows = random.sample(self.rows, len(self.rows))  # shuffles rows
-        i_var_indices = []  # list for the independent variable indices
-        i_var_txts = []  # list of independent variable names
-        for i_var in self.cols.y:
-            # iterating over the different independent variables
-            i_var_indices.append(i_var.at)
-            i_var_txts.append(i_var.txt)
-        print("1. top6", end=' ')
-        for name in i_var_txts:
-            print(f"{name},", end=' ')
-        print()
-        for i in range(6):
-            print(f"Row {i+1}", end=' ')
-            for j in range(len(i_var_indices)):
-                print(f"{rows[i_var_indices[j]]}")
+        top_X(rows, 6, 1)   # baseline #1
+        top_X(rows, 50, 2)  # baseline #2
+
+        # Now we must sort rows based on the distance to heaven -- will fix this once d2h is done
+        # rows.sort(key=d2h, reverse=True)
+        # print some stuff...
+
+        rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
+        lite = rows[0:budget0+1]  # grab first budget0 amount of rows
+        dark = rows[budget0:]     # grab the remaining rows
+
+        for i in range(budget):
+            best, rest = best_rest(lite, len(lite)**some)   # sort our known rows into good vs bad
+            todo, selected = split(best, rest, lite, dark)  # figuring out which row is the most
+            # confusing --> todo will be the index of the MOST confusing value while selected
+            # is a data object storing the rows from dark that most liked best(of which were tested)
+
+            # ngl I'm not sure what the point of the following 2 lines is
+            stats.append(selected.mid())
+            bests.append(best.rows[0])
+
+            # Insert into the lite, the most confusing example from dark(also remove the val from
+            # dark
+            lite.append(dark.pop(todo))
+        return stats, bests
+
