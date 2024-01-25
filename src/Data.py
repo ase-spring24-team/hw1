@@ -2,8 +2,9 @@
 File by Samuel Kwiatkowski-Martin
 This file is our data class, which will contain and process columns and rows
 """
-from Row import Row # Imports the Row class from the Row file
-from util import csv # Imports the csv function from util
+import random  # for our shuffling
+from Row import Row  # Imports the Row class from the Row file
+from util import csv  # Imports the csv function from util
 from Cols import Cols  # Imports the Cols class
 
 
@@ -183,10 +184,9 @@ class Data:
             if tmp > max:
                 out, max = i, tmp
         return out, selected
-    
     def best_rest(self, rows, want):
         best = self.cols.names
-        rest = self.cols.names 
+        rest = self.cols.names
         for i, row in enumerate(rows):
             if i <= want:
                 best.append(row)
@@ -194,3 +194,25 @@ class Data:
                 rest.append(row)
         return Data(best), Data(rest)
 
+    def gate(self, budget0, budget, some):
+        """
+        This function guesses, accesses, transforms the data, and then evaluates
+        :param budget0: initial number of rows to be evaluated
+        :param budget: the number of rows to subsequently evaluate
+        :param some: a constant float value to determine how many rows to place in best versus rest
+        """
+        rows = random.sample(self.rows, len(self.rows))  # shuffles rows
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print("1. top6", end=' ')
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        for i in range(6):
+            print(f"Row {i+1}", end=' ')
+            for j in range(len(i_var_indices)):
+                print(f"{rows[i_var_indices[j]]}")
