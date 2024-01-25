@@ -284,6 +284,27 @@ def test_learn(learned):
     """
     assert learned
     # will throw error if somehow the data gets added before being learned on
+def test_likes():
+    """
+    Test function to make sure that the likes function is working correctly
+    """
+    for k in range(4):
+        for m in range(4):
+            #  loop through all the hyperparameters
+            the.k = k
+            the.m = m
+            wme = SLOTS({"acc": 0, "datas": {}, "tries": 0, "n": 0})
+            Data("../data/test2.csv",lambda data, t: learn(data,t,wme))
+            print(wme.acc/(wme.tries))
+            new_row = Row(["Sunny", "Cool", "High", "True", "?"])
+            yes = new_row.like(wme.datas["yes"], 15, 2)
+            no = new_row.like(wme.datas["no"], 15, 2)
+            normalized_yes = yes/(yes+no)
+            normalized_no = no/(yes+no)
+            print(normalized_yes)
+            print(normalized_no)
+            print(k,m)
+            print()
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -293,3 +314,7 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
+    #ascii_table("../data/soybean.csv")
+    #km()
+    #bayes()
+    test_likes()
