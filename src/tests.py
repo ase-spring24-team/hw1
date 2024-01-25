@@ -258,6 +258,13 @@ def km_2():
     print(f"{round(best_acc,2)},{best_k},{best_m}")
     return best_acc > 0.72
 
+def gate20():
+    for i in range(20):
+        d = Data("../data/auto93.csv")
+        _stats, _bests = d.gate(4, 16, .5)
+        stat, best = _stats[-1], _bests[-1]
+        print(l.rnd(best.d2h(d), l.rnd(stat.d2h(d))))
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
