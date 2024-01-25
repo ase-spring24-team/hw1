@@ -183,3 +183,14 @@ class Data:
             if tmp > max:
                 out, max = i, tmp
         return out, selected
+    
+    def best_rest(self, rows, want):
+        best = self.cols.names
+        rest = self.cols.names 
+        for i, row in enumerate(rows):
+            if i <= want:
+                best.append(row)
+            else:
+                rest.append(row)
+        return Data(best), Data(rest)
+
