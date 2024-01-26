@@ -40,3 +40,13 @@ class Row:
                 inc = col.like(v,prior)
                 out = out + (math.log(inc) if inc != 0 else float("-inf"))
         return math.exp(1)**out
+
+    def d2h(self, data):
+        """
+        Function that returns the d2h (distance to heaven) value
+        :return: d2h
+        """
+        d, n = 0, 0
+        for col in data.cols.y:
+            n += 1
+            d += abs(col.heaven - col.norm(self.cells[col.at])) ** 2
