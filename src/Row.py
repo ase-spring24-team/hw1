@@ -50,3 +50,4 @@ class Row:
         for col in data.cols.y:
             n += 1
             d += abs(col.heaven - col.norm(self.cells[col.at])) ** 2
+        return math.sqrt(d) / math.sqrt(n)

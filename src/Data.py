@@ -184,7 +184,12 @@ class Data:
             if tmp > max:
                 out, max = i, tmp
         return out, selected
+    
     def best_rest(self, rows, want):
+        """
+        This function divides the row as best and rest
+        """
+        rows = sorted(rows, key = lambda x : x.d2h(self))
         best = self.cols.names
         rest = self.cols.names
         for i, row in enumerate(rows):
