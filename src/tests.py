@@ -263,7 +263,16 @@ def gate20():
         d = Data("../data/auto93.csv")
         _stats, _bests = d.gate(4, 16, .5)
         stat, best = _stats[-1], _bests[-1]
-        print(l.rnd(best.d2h(d), l.rnd(stat.d2h(d))))
+        print(best)
+        print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+
+def gate1():
+    d = Data("../data/auto93.csv")
+    _stats, _bests = d.gate(4, 16, .5)
+    stat, best = _stats[-1], _bests[-1]
+    print(best.cells)
+    print("gate1", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
@@ -325,4 +334,4 @@ if __name__ == '__main__':
     #km()
     #bayes()
     #test_likes()
-    gate20()
+    gate1()

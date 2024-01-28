@@ -273,7 +273,6 @@ class Data:
             # is a data object storing the rows from dark that most liked best(of which were tested)
 
             # ngl I'm not sure what the point of the following 2 lines is
-            print(selected)
             stats.append(selected.mid())
             bests.append(best.rows[0])
 
