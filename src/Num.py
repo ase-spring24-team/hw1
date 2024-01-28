@@ -60,7 +60,7 @@ class Num:
         if x == "?":
             return x
         else:
-            (x - self.lo) / (self.hi - self.lo + 1E-30)
+            return (x - self.lo) / (self.hi - self.lo + 1E-30)
 
     # Likelihood
     def like(self, x, _):

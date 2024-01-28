@@ -199,7 +199,7 @@ class Data:
                 rest.append(row)
         return Data(best), Data(rest)
 
-    def top_X(self, rows, top_num, option_num):
+    def baseline1_2(self, rows, top_num, option_num):
         """
         Prints the top X number of row's independent variable values
         :param rows: the shuffled rows object
@@ -219,7 +219,7 @@ class Data:
         for i in range(top_num):
             print(f"Row {i + 1}", end=' ')
             for j in range(len(i_var_indices)):
-                print(f"{rows[i][i_var_indices[j]]}", end=' ')
+                print(f"{rows[i].cells[i_var_indices[j]]}", end=' ')
             print()
     def baseline3(self,closest_row):
         """
@@ -240,7 +240,7 @@ class Data:
         print(f"Row {1}", end=' ')
         for j in range(len(i_var_indices)):
             # print the y values of row
-            print(f"{row[i_var_indices[j]]}", end=' ')
+            print(f"{row.cells[i_var_indices[j]]}", end=' ')
         print()
 
     def gate(self, budget0, budget, some):
@@ -253,21 +253,21 @@ class Data:
         stats = []
         bests = []
         rows = random.sample(self.rows, len(self.rows))  # shuffles rows
-        top_X(rows, 6, 1)   # baseline #1
-        top_X(rows, 50, 2)  # baseline #2
+        self.baseline1_2(rows, 6, 1)   # baseline #1
+        self.baseline1_2(rows, 50, 2)  # baseline #2
 
         # Now we must sort rows based on the distance to heaven -- will fix this once d2h is done
         rows.sort(key=lambda x: x.d2h(self))
         # print some stuff...
-        baseline3(rows[0])  # baseline 3
+        self.baseline3(rows[0])  # baseline 3
 
         rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
         lite = rows[0:budget0+1]  # grab first budget0 amount of rows
         dark = rows[budget0:]     # grab the remaining rows
 
         for i in range(budget):
-            best, rest = best_rest(lite, len(lite)**some)   # sort our known rows into good vs bad
-            todo, selected = split(best, rest, lite, dark)  # figuring out which row is the most
+            best, rest = self.best_rest(lite, len(lite)**some)   # sort our known rows into good vs bad
+            todo, selected = self.split(best, rest, lite, dark)  # figuring out which row is the most
             # confusing --> todo will be the index of the MOST confusing value while selected
             # is a data object storing the rows from dark that most liked best(of which were tested)
 

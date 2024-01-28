@@ -324,4 +324,5 @@ if __name__ == '__main__':
     #ascii_table("../data/soybean.csv")
     #km()
     #bayes()
-    test_likes()
+    #test_likes()
+    gate20()
