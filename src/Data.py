@@ -119,24 +119,24 @@ class Data:
         if cols == "y":
             for col in self.cols.y:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.mid)
+                u.append(col.mid())
 
         elif cols == "x":
             for col in self.cols.x:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.mid)
+                u.append(col.mid())
 
         elif cols == "all":
             for col in self.cols.all:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.mid)
+                u.append(col.mid())
 
         else:
             #  This is our strange scenario where the str input in lets say an individual column
             for col in self.cols.all:
                 if col.txt in cols:
                     #  Remember, col here is either a NUM or SYM object
-                    u.append(col.mid)
+                    u.append(col.mid())
 
         return Row(u)
 
@@ -151,24 +151,24 @@ class Data:
         if cols == "y":
             for col in self.cols.y:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.div)
+                u.append(col.div())
 
         elif cols == "x":
             for col in self.cols.x:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.div)
+                u.append(col.div())
 
         elif cols == "all":
             for col in self.cols.all:
                 #  Remember, col here is either a NUM or SYM object
-                u.append(col.div)
+                u.append(col.div())
 
         else:
             #  This is our strange scenario where the str input in lets say an individual column
             for col in self.cols.all:
                 if col.txt in cols:
                     #  Remember, col here is either a NUM or SYM object
-                    u.append(col.div)
+                    u.append(col.div())
 
         return Row(u)
 
