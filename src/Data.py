@@ -4,7 +4,7 @@ This file is our data class, which will contain and process columns and rows
 """
 import random  # for our shuffling
 from Row import Row  # Imports the Row class from the Row file
-from util import csv  # Imports the csv function from util
+from util import csv, rnd  # Imports the csv function from util
 from Cols import Cols  # Imports the Cols class
 
 
@@ -222,6 +222,7 @@ class Data:
             for j in range(len(i_var_indices)):
                 print(f"{rows[i].cells[i_var_indices[j]]}", end=' ')
             print()
+
     def baseline3(self,closest_row):
         """
         This function prints the y values of the first row after sorting by d2h
@@ -242,6 +243,78 @@ class Data:
         for j in range(len(i_var_indices)):
             # print the y values of row
             print(f"{row.cells[i_var_indices[j]]}", end=' ')
+        print()
+
+
+    def baseline4(self,budget0, budget_number,dark):
+        """
+        This function prints the y values of the centroid row of the selected
+        :param budget0: initial number of rows to be evaluated
+        :param budget_number: The number of budget in which it is printed
+        :param dark: The dark rows 
+        """
+        shuffled_row = random.sample(dark, len(dark))  # shuffles dark
+        random_rows = [self.cols.names]
+        for i in range(budget0 + budget_number):
+            random_rows.append(shuffled_row[i])
+        row = Data(random_rows).mid()
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print(f"4. rand")
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        for j in range(len(i_var_indices)):
+            # print the y values of row
+            print(f"{rnd(row.cells[i_var_indices[j]])}", end=' ')
+        print()
+
+    def baseline5(self, budget_number,selected_row):
+        """
+        This function prints the y values of the centroid row of the selected
+        :param budget_number: The number of budget in which it is printed
+        :param selected_row: The centroid row of SELECTED
+        """
+        row = selected_row
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print(f"5. mid")
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        for j in range(len(i_var_indices)):
+            # print the y values of row
+            print(f"{rnd(row.cells[i_var_indices[j]])}", end=' ')
+        print()
+
+    def baseline6(self, budget_number,best_row):
+        """
+        This function prints the y values of the first row in best
+        :param budget_number: The number of budget in which it is printed
+        :param best_row: The best row so far
+        """
+        row = best_row
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print(f"6. top")
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        for j in range(len(i_var_indices)):
+            # print the y values of row
+            print(f"{rnd(row.cells[i_var_indices[j]])}", end=' ')
         print()
 
     def gate(self, budget0, budget, some):
@@ -275,6 +348,12 @@ class Data:
             # ngl I'm not sure what the point of the following 2 lines is
             stats.append(selected.mid())
             bests.append(best.rows[0])
+
+            print(f"Budget {i} :", end='\n')
+            self.baseline4(budget0, i, dark)
+            self.baseline5(i, selected.mid())
+            self.baseline6(i, best.rows[0])
+            
 
             # Insert into the lite, the most confusing example from dark(also remove the val from
             # dark
