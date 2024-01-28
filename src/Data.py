@@ -219,8 +219,29 @@ class Data:
         for i in range(top_num):
             print(f"Row {i + 1}", end=' ')
             for j in range(len(i_var_indices)):
-                print(f"{rows[i_var_indices[j]]}", end=' ')
+                print(f"{rows[i][i_var_indices[j]]}", end=' ')
             print()
+    def baseline3(self,closest_row):
+        """
+        This function prints the y values of the first row after sorting by d2h
+        :param closest_row: The closest row to the heaven point
+        """
+        row = closest_row
+        i_var_indices = []  # list for the independent variable indices
+        i_var_txts = []  # list of independent variable names
+        for i_var in self.cols.y:
+            # iterating over the different independent variables
+            i_var_indices.append(i_var.at)
+            i_var_txts.append(i_var.txt)
+        print(f"3. most ")
+        for name in i_var_txts:
+            print(f"{name},", end=' ')
+        print()
+        print(f"Row {1}", end=' ')
+        for j in range(len(i_var_indices)):
+            # print the y values of row
+            print(f"{row[i_var_indices[j]]}", end=' ')
+        print()
 
     def gate(self, budget0, budget, some):
         """
@@ -236,8 +257,9 @@ class Data:
         top_X(rows, 50, 2)  # baseline #2
 
         # Now we must sort rows based on the distance to heaven -- will fix this once d2h is done
-        # rows.sort(key=d2h, reverse=True)
+        rows.sort(key=lambda x: x.d2h(self))
         # print some stuff...
+        baseline3(rows[0])  # baseline 3
 
         rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
         lite = rows[0:budget0+1]  # grab first budget0 amount of rows
