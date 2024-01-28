@@ -23,7 +23,8 @@ class Data:
             self.process_file(src, func)
         ## else the scenario where source is a table already
         else:
-            self.add(src, func)
+            for x in src:
+                self.add(x, func)
     def process_file(self, src, func=None):
         """
         Function that process the src file
@@ -107,7 +108,7 @@ class Data:
                 pass  # doesn't need to be implemented yet
         return u
 
-    def mid(self, cols):
+    def mid(self, cols = "all"):
         """
         Function returns the means and modes of all or a selection of columns
         :param cols: A str that tells the function which columns to calculate on
@@ -172,7 +173,7 @@ class Data:
         return Row(u)
 
     def split(self, best, rest, lite, dark):
-        selected = Data(self.cols.names)
+        selected = Data([self.cols.names])
         max = 1E30
         out = 1
         for (i, row) in enumerate(dark):
@@ -190,8 +191,8 @@ class Data:
         This function divides the row as best and rest
         """
         rows = sorted(rows, key = lambda x : x.d2h(self))
-        best = self.cols.names
-        rest = self.cols.names
+        best = [self.cols.names]
+        rest = [self.cols.names]
         for i, row in enumerate(rows):
             if i <= want:
                 best.append(row)
@@ -262,7 +263,7 @@ class Data:
         self.baseline3(rows[0])  # baseline 3
 
         rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
-        lite = rows[0:budget0+1]  # grab first budget0 amount of rows
+        lite = rows[0:budget0]  # grab first budget0 amount of rows
         dark = rows[budget0:]     # grab the remaining rows
 
         for i in range(budget):
@@ -272,6 +273,7 @@ class Data:
             # is a data object storing the rows from dark that most liked best(of which were tested)
 
             # ngl I'm not sure what the point of the following 2 lines is
+            print(selected)
             stats.append(selected.mid())
             bests.append(best.rows[0])
 
