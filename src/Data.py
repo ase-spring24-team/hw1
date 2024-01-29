@@ -317,12 +317,13 @@ class Data:
             print(f"{rnd(row.cells[i_var_indices[j]])}", end=' ')
         print()
 
-    def gate(self, budget0, budget, some):
+    def gate(self, budget0, budget, some, test_name=""):
         """
         This function guesses, accesses, transforms the data, and then evaluates
         :param budget0: initial number of rows to be evaluated
         :param budget: the number of rows to subsequently evaluate
         :param some: a constant float value to determine how many rows to place in best versus rest
+        :param test_name: the name of the test we are running if at all
         """
         stats = []
         bests = []
@@ -336,6 +337,9 @@ class Data:
         self.baseline3(rows[0])  # baseline 3
 
         rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
+        if test_name == "shuffle":
+            # check and make sure the shuffle worked
+            assert rows[0] != self.rows[0] and rows[-1] != self.rows[-1]
         lite = rows[0:budget0]  # grab first budget0 amount of rows
         dark = rows[budget0:]     # grab the remaining rows
 
