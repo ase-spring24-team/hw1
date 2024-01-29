@@ -276,7 +276,16 @@ def test_20_shuffles():
         stat, best = _stats[-1], _bests[-1]
         print(best)
         print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
-
+def test_best_less_than_rest():
+    """
+    Tests that best is always less then rest
+    """
+    for i in range(20):
+        d = Data("../data/auto93.csv")
+        _stats, _bests = d.gate(4, 16, .5, "best less than rest")
+        stat, best = _stats[-1], _bests[-1]
+        print(best)
+        print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
 def gate1():
     d = Data("../data/auto93.csv")
     _stats, _bests = d.gate(4, 16, .5)
@@ -346,4 +355,5 @@ if __name__ == '__main__':
     #bayes()
     #test_likes()
     #gate1()
-    test_20_shuffles()
+    #test_20_shuffles()
+    test_best_less_than_rest()
