@@ -69,7 +69,7 @@ Answer:
 #### Question 2
 How many y row evaluations are required for finding the absolute best?
 
-Answer:
+Answer: The number of evaluations required finding the absolute best is `O(#yColumns × #Data)`. For the the `auto93.csv` file, `#yColumns = 3` and `#Data = 398`. So the number of evaluation is `1194`.
 
 #### Question 3
 How does SMO do compared to absolute best?
