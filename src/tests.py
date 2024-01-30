@@ -289,12 +289,16 @@ def test_best_less_than_rest():
     """
     Tests that best is always less then rest
     """
+    budget0 = 4
+    budget = 16
+    some = .5
     for i in range(20):
         d = Data("../data/auto93.csv")
-        _stats, _bests = d.gate(4, 16, .5, "best less than rest")
-        stat, best = _stats[-1], _bests[-1]
-        print(best)
-        print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+        rows = random.sample(d.rows, len(d.rows))  # shuffles rows
+        lite = rows[0:budget0]  # grab first budget0 amount of rows
+        for i in range(budget):
+            best, rest = d.best_rest(lite, len(lite) ** some)  # sort our known rows into good vs bad
+            assert len(best.rows) < len(rest.rows) + 1 ## plus one for wiggle room
 
 def test_gate():
     d = Data("../data/auto93.csv")
@@ -393,4 +397,5 @@ if __name__ == '__main__':
     #test_likes()
     #gate1()
     #test_20_shuffles()
-    test_d2h_sort()
+    #test_d2h_sort()
+    test_best_less_than_rest()

@@ -186,7 +186,7 @@ class Data:
                 out, max = i, tmp
         return out, selected
     
-    def best_rest(self, rows, want, test_name):
+    def best_rest(self, rows, want):
         """
         This function divides the row as best and rest
         """
@@ -198,10 +198,6 @@ class Data:
                 best.append(row)
             else:
                 rest.append(row)
-        if test_name == "best less than rest":
-            # testing that best is always smaller than rest
-            assert len(best) <= len(rest) + 1 # plus one so that best has a small amount of wiggle
-            # room to be larger than rest
         return Data(best), Data(rest)
 
     def baseline1_2(self, rows, top_num, option_num):
