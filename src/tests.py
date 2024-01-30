@@ -349,6 +349,29 @@ def test_d2h_sort():
     return True
 
 
+def test_b_and_r():
+    """
+    Tests if the sorting using d2h values is done right
+    """
+    budget0 = 4
+    some = .5
+    d = Data("../data/auto93.csv")
+    rows = d.rows
+    lite = rows[0:budget0]  
+    dark = rows[budget0:]
+    best, rest = d.best_rest(lite, len(lite)**some)
+    b = dark[0].like(best, len(lite), 2)
+    r = dark[0].like(rest, len(lite), 2)
+    print(b,r)
+
+    if isinstance(b, (int, float, complex)) and isinstance(r, (int, float, complex)):
+        print("The values of b and r are numbers")
+        return True
+    else:
+        print("The values of b and r are not numbers")
+        return False
+
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
