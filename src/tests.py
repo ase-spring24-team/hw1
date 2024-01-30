@@ -9,6 +9,7 @@ from Sym import Sym
 from util import norm, rnd
 import util as l
 from the import THE, the, SLOTS
+import random
 
 tests = {}
 
@@ -303,6 +304,32 @@ def test_gate():
     print("gate", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
     return best.d2h(d) < stat.d2h(d)
 
+def test_d2h():
+    """
+    Tests if the d2h fucntion is returning the correct values
+    """
+    d = Data("../data/auto93.csv")
+    print(rnd(d.rows[0].d2h(d)))
+    
+    return rnd(d.rows[0].d2h(d)) == 0.8
+
+def test_d2h_sort():
+    """
+    Tests if the sorting using d2h values is done right
+    """
+    d = Data("../data/auto93.csv")
+    rows = random.sample(d.rows, 10)
+    rows.sort(key=lambda x: x.d2h(d))
+    pre = rnd(d.rows[0].d2h(d))
+
+    for i in range(10):
+        next = rnd(d.rows[i].d2h(d))
+        if next < pre:
+            return False
+    
+    print("The rows are sorted based on d2h value")
+    return True
+
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
@@ -366,4 +393,4 @@ if __name__ == '__main__':
     #test_likes()
     #gate1()
     #test_20_shuffles()
-    test_best_less_than_rest()
+    test_d2h_sort()
