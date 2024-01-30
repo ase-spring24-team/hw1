@@ -258,13 +258,21 @@ def km_2():
     print(f"{round(best_acc,2)},{best_k},{best_m}")
     return best_acc > 0.72
 
+def test_heaven():
+    d = Data([['Lbs-', 'Acc+']])
+    print({d.cols.y[0].txt: d.cols.y[0].heaven, d.cols.y[1].txt: d.cols.y[1].heaven})
+    return d.cols.y[0].heaven == 0 and d.cols.y[1].heaven == 1
+
 def gate20():
-    for i in range(20):
+    flag = True
+    for i in range(5):
         d = Data("../data/auto93.csv")
         _stats, _bests = d.gate(4, 16, .5)
         stat, best = _stats[-1], _bests[-1]
-        print(best)
         print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+        if best.d2h(d) > stat.d2h(d):
+            flag = False
+    return flag
 
 def test_20_shuffles():
     """
@@ -286,12 +294,14 @@ def test_best_less_than_rest():
         stat, best = _stats[-1], _bests[-1]
         print(best)
         print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
-def gate1():
+
+def test_gate():
     d = Data("../data/auto93.csv")
     _stats, _bests = d.gate(4, 16, .5)
     stat, best = _stats[-1], _bests[-1]
     print(best.cells)
-    print("gate1", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+    print("gate", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+    return best.d2h(d) < stat.d2h(d)
 
 
 # function to automatically load all functions in this module in test variable
