@@ -60,6 +60,9 @@ python gate.py -t km
 - Recommended low frequency settings for `soybean.csv` are `k=2` and `m=1`, as they return the best accuracy of 85%.
 - Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
 
+### HW4
+#### Questions
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
