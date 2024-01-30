@@ -61,6 +61,11 @@ python gate.py -t km
 - Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
 
 ### HW4
+To execute the SMO using gate function 20 times:
+```
+python gate.py -t gate20
+```
+The output files are stored in `hw/w4` directory
 #### Question 1
 Does SMO do better than the random baselines?
 
@@ -70,7 +75,9 @@ First, look to [Link Text](hw/w4/gate20.out)
 #### Question 2
 How many y row evaluations are required for finding the absolute best?
 
-Answer: The number of evaluations required finding the absolute best is `O(#yColumns × #Data)`. For the the `auto93.csv` file, `#yColumns = 3` and `#Data = 398`. So the number of evaluation is `1194`.
+Answer: 
+
+The number of evaluations required finding the absolute best is `O(#yColumns × #Data)`. For the the `auto93.csv` file, `#yColumns = 3` and `#Data = 398`. So the number of evaluation is `1194`.
 
 #### Question 3
 How does SMO do compared to absolute best?
