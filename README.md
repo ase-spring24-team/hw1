@@ -70,7 +70,7 @@ The output files are stored in `hw/w4` directory
 Does SMO do better than the random baselines?
 
 Answer: 
-First, look to [Link Text](hw/w4/gate20.out)
+First, look to [Our Data Output](hw/w4/gate20.out). Here it can be seen that SMO does better than our random baselines nearly 100% of the time. Look at any section of the data and see for yourself. Let's take a random section in the middle, for example, let's say the 3rd run of gate. 
 
 #### Question 2
 How many y row evaluations are required for finding the absolute best?
