@@ -61,7 +61,20 @@ python gate.py -t km
 - Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
 
 ### HW4
-#### Questions
+#### Question 1
+Does SMO do better than the random baselines?
+
+Answer: 
+
+#### Question 2
+How many y row evaluations are required for finding the absolute best?
+
+Answer:
+
+#### Question 3
+How does SMO do compared to absolute best?
+
+Answer
 
 ## Team members:
 
