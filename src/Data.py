@@ -344,7 +344,7 @@ class Data:
         dark = rows[budget0:]     # grab the remaining rows
 
         for i in range(budget):
-            best, rest = self.best_rest(lite, len(lite)**some, test_name)   # sort our known rows into good vs bad
+            best, rest = self.best_rest(lite, len(lite)**some)   # sort our known rows into good vs bad
             todo, selected = self.split(best, rest, lite, dark)  # figuring out which row is the most
             # confusing --> todo will be the index of the MOST confusing value while selected
             # is a data object storing the rows from dark that most liked best(of which were tested)

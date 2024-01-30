@@ -402,4 +402,5 @@ if __name__ == '__main__':
     #gate1()
     #test_20_shuffles()
     #test_d2h_sort()
-    test_best_less_than_rest()
+    #test_best_less_than_rest()
+    gate20()
