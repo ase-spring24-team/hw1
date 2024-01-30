@@ -70,7 +70,7 @@ The output files are stored in `hw/w4` directory
 Does SMO do better than the random baselines?
 
 Answer: 
-First, look to [Our Data Output](hw/w4/gate20.out). Here it can be seen that SMO does better than our random baselines nearly 100% of the time. Look at any section of the data and see for yourself. Let's take a random section in the middle, for example, let's say the 3rd run of gate. Starting [here](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L445) you can see that the top example in print 1 and 2 has a terrible weight and acceleration, 3761 and 9.5 respectively when compared to [print 6](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L665) (SMO) where our weight calculated was blank and our acceleration was 
+First, look to [Our Data Output](hw/w4/gate20.out). Here it can be seen that SMO does better than our random baselines nearly 100% of the time. Look at any section of the data and see for yourself. Let's take a random section in the middle, for example, let's say the 3rd run of gate. Starting [here](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L445) you can see that the top example in print 1 and 2 has a terrible weight and acceleration, 3761 and 9.5 respectively when compared to [print 6](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L665) (SMO) where our weight calculated was 2130  and our acceleration was 24.6. Even compared to [print 4]() print 6's weight, acceleration, and mpg is better as can be seen.  
 
 #### Question 2
 How many y row evaluations are required for finding the absolute best?
