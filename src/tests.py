@@ -321,6 +321,16 @@ def test_d2h():
     
     return rnd(d.rows[0].d2h(d)) == 0.8
 
+
+def test_d2h2():
+    """
+    Tests if the d2h fucntion is returning the correct values
+    """
+    d = Data("../data/auto93.csv")
+    print(rnd(d.rows[15].d2h(d)))
+
+    return rnd(d.rows[15].d2h(d)) == 0.85
+
 def test_d2h_sort():
     """
     Tests if the sorting using d2h values is done right
@@ -403,4 +413,5 @@ if __name__ == '__main__':
     #test_20_shuffles()
     #test_d2h_sort()
     #test_best_less_than_rest()
-    gate20()
+    #gate20()
+    test_d2h2()
