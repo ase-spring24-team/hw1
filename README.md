@@ -65,6 +65,7 @@ python gate.py -t km
 Does SMO do better than the random baselines?
 
 Answer: 
+First, look to [Link Text](hw/w4/gate20.out)
 
 #### Question 2
 How many y row evaluations are required for finding the absolute best?
