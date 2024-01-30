@@ -292,13 +292,17 @@ def test_best_less_than_rest():
     budget0 = 4
     budget = 16
     some = .5
+    passed = True
     for i in range(20):
         d = Data("../data/auto93.csv")
         rows = random.sample(d.rows, len(d.rows))  # shuffles rows
         lite = rows[0:budget0]  # grab first budget0 amount of rows
         for i in range(budget):
             best, rest = d.best_rest(lite, len(lite) ** some)  # sort our known rows into good vs bad
-            assert len(best.rows) < len(rest.rows) + 1 ## plus one for wiggle room
+            if len(best.rows) > len(rest.rows): ## plus one for wiggle room
+                passed = False
+
+    return passed
 
 def test_gate():
     d = Data("../data/auto93.csv")
