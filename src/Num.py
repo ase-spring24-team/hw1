@@ -2,6 +2,8 @@
 File by Sai Raj Thirumalai
 This file is our Num class, which will contain the numeric data
 """
+import math
+
 
 class Num:
     def __init__(self, s=" ", n=0):
@@ -68,4 +70,21 @@ class Num:
         nom = 2.718 ** (-.5*(x - mu)**2 / (sd **2))
         denom = (sd*2.5 + 1E-30)
         return nom/denom
+
+    def dist(self, x, y):
+        """
+        Function check the distance between one of self's row num values and some other row's
+        num value
+        :param x: This instances value at a specific column in the row
+        :param y: The other row instance's value a specific column
+        """
+        if x == "?" and y == "?":
+            # if both the x and y values are unknown, assume the worst
+            return 1
+        x, y = self.norm(x), self.norm(y)
+        if x == "?":
+            x = 1 if y < .5 else 0
+        if y == "?":
+            y = 1 if x < .5 else 0
+        return abs(x-y)
 
