@@ -6,6 +6,7 @@ import random  # for our shuffling
 from Row import Row  # Imports the Row class from the Row file
 from util import csv, rnd  # Imports the csv function from util
 from Cols import Cols  # Imports the Cols class
+from the import the
 
 
 class Data:
@@ -363,4 +364,12 @@ class Data:
             # dark
             lite.append(dark.pop(todo))
         return stats, bests
-
+    
+    def farapart(self, rows, sortp, a):
+        far = (len(rows) * the.Far ) // 1
+        evals = a and 1 or 2
+        a = a or random.choice(rows).neighbors[far]
+        b = a.neighbors(self, rows)[far]
+        if sortp and b.d2h(self) < a.d2h(self):
+            a, b = b, a
+        return a, b, a.dist(b, self), evals
