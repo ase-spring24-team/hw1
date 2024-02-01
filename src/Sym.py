@@ -60,3 +60,17 @@ class Sym:
             return 0
         else:
             return (h + the.m * prior)/ (self.n + the.m)
+
+    def dist(self, x, y):
+        """
+        This function returns the distance of a sym object to another sym object
+        However, sym objects aren't numbers so we assume the distance is 1 in every case where
+        they aren't the same, or where we don't know one of the value. Otherwise, they are the same
+        meaning 0 distance
+        :param x: the self row's sym value
+        :param y: the row we are comparing to's sym value
+        """
+        if x == "?" or y == "?":
+            # if either values is unknown
+            return 1  # return a maximum distance of 1
+        return 1 if x != y else 0
