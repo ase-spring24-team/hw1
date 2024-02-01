@@ -62,4 +62,9 @@ class Row:
         
         return (d/n) ** (1/p)
     
-    
+    def neighbors(self, data, rows = None):
+        if rows is None:
+            rows = data
+        rows = rows.copy()
+        rows.sort(lambda row: self.dist(row, data))
+        return rows
