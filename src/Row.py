@@ -51,3 +51,15 @@ class Row:
             n += 1
             d += abs(col.heaven - col.norm(self.cells[col.at])) ** 2
         return math.sqrt(d) / math.sqrt(n)
+    
+    def dist(self, other, data):
+        d, n = 0, 0
+        p = the.p
+
+        for col in data.cols.x :
+            n += 1
+            d += col.dist(self.cells[col.at], other.cells[col.at]) ** p
+        
+        return (d/n) ** (1/p)
+    
+    
