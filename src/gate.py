@@ -19,7 +19,7 @@ OPTIONS:
 """
 
 import util as l
-import tests as eg
+import test_gate as eg
 import random
 from the import the
 
