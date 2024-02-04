@@ -365,11 +365,11 @@ class Data:
             lite.append(dark.pop(todo))
         return stats, bests
     
-    def farapart(self, rows, sortp, a):
-        far = (len(rows) * the.Far ) // 1
+    def farapart(self, rows, sortp = None, a = None):
+        far = int((len(rows) * the.Far ) // 1) 
         evals = a and 1 or 2
-        a = a or random.choice(rows).neighbors[far]
+        a = a or random.choice(rows).neighbors(self, rows)[far]
         b = a.neighbors(self, rows)[far]
         if sortp and b.d2h(self) < a.d2h(self):
             a, b = b, a
-        return a, b, a.dist(b, self), evals
+        return (a, b, a.dist(b, self), evals)

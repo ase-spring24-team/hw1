@@ -64,7 +64,7 @@ class Row:
     
     def neighbors(self, data, rows = None):
         if rows is None:
-            rows = data
+            rows = data.rows
         rows = rows.copy()
-        rows.sort(lambda row: self.dist(row, data))
+        rows.sort(key=lambda row: self.dist(row, data))
         return rows
