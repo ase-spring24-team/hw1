@@ -3,6 +3,8 @@ File created by Sathiya Narayanan Venkatesan
 Examples class -- essentially just the testing mylo related functions 
 """
 from the import THE, the, SLOTS
+from Data import Data
+import util as l
 
 tests = {}
 
@@ -25,6 +27,19 @@ def all():
     print("FAIL:", bad)
     exit(bad)
 
+def help():
+    print(the.__help)
+    return True
+
+def egs():
+    """
+    Prints out all the different tests we can run
+    """
+    #test_names = ["all", "egs", "help", "sym", "num", "csv", "data", "stats", "oo"]
+    test_names = tests.keys()
+    for test_name in test_names:
+        print("python gate.py -t " + test_name)
+    return True 
 
 
 
