@@ -31,6 +31,13 @@ def help():
     print(the.__help)
     return True
 
+def far():
+    d  = Data.new("../data/auto93.csv")
+    far = d.farapart(d.rows)
+    print("far1: ", far[0])
+    print("far2: ", far[1])
+    print("distance = ", far[2])
+
 def egs():
     """
     Prints out all the different tests we can run
@@ -38,7 +45,7 @@ def egs():
     #test_names = ["all", "egs", "help", "sym", "num", "csv", "data", "stats", "oo"]
     test_names = tests.keys()
     for test_name in test_names:
-        print("python gate.py -t " + test_name)
+        print("python mylo.py -t " + test_name)
     return True 
 
 
