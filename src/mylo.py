@@ -18,7 +18,7 @@ OPTIONS:
   -D --D      second cut                      = 4
   -f --file   csv data file name              = ../data/diabetes.csv
   -F --Far    how far to search for faraway?  = .95
-  -h --help   show help                       = false
+  -h --help   show help                       = False
   -H --Half   #items to use in clustering     = 256
   -p --p      weights for distance            = 2
   -s --seed   random number seed              = 31210
@@ -38,7 +38,7 @@ def run(_the):
       exit(0)
     the._set(_the)
     random.seed(_the.seed)
-    oops = False if eg._run(_the.test) else True
+    oops = False if eg._run(_the.todo) else True
 
     exit(oops)
 
