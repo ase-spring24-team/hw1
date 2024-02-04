@@ -68,7 +68,7 @@ def dist():
     and then prints every 30th row with the distance of each to the first row
     """
     d = Data("../data/auto93.csv")
-    r1 = d.rows[1]  # pull out the first row
+    r1 = d.rows[0]  # pull out the first row
     rows = r1.neighbors(d)
     for i in range(len(rows)):
         if i%30 == 0:
