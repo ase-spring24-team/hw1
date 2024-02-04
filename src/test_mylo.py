@@ -61,8 +61,20 @@ def _run(t_name):
         return tests[t_name]()
     else:
         return None
-    
+
+def dist():
+    """
+    Prints the first row, sorts all the rows based on their distance to the first row,
+    and then prints every 30th row with the distance of each to the first row
+    """
+    d = Data("../data/auto93.csv")
+    r1 = d.rows[1]  # pull out the first row
+    rows = r1.neighbors(d)
+    for i in range(len(rows)):
+        if i%30 == 0:
+            print(i, rows[i].cells, round(rows[i].dist(r1, d),2))
 
 if __name__ == '__main__':
     #all()
-    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2}))
+    dist()
