@@ -39,6 +39,7 @@ def far():
     print("far1: ", l.o(far[0]))
     print("far2: ", l.o(far[1]))
     print("distance = ", far[2])
+    return l.rnd(far[2]) == 85
 
 def egs():
     """
@@ -49,6 +50,28 @@ def egs():
     for test_name in test_names:
         print("python mylo.py -t " + test_name)
     return True 
+
+def test_row_neighbors0():
+    d = Data("../data/auto93.csv")
+    r1 = d.rows[0]
+    r2 = r1.neighbors(d)[0]
+    print(l.o(r1), "==", l.o(r2))
+    return r1==r2
+
+def test_row_neighbors1():
+    d = Data("../data/auto93.csv")
+    r1 = d.rows[0]
+    r2 = r1.neighbors(d)[1]
+    print(l.o(r1), "closest", l.o(r2))
+    return r1 != r2
+
+def test_row_dist():
+    d = Data("../data/auto93.csv")
+    r1 = d.rows[0]
+    r2 = r1.neighbors(d)[1]
+    distance  = r2.dist(r1, d)
+    print(l.o(r1), l.o(r2), l.rnd(distance))
+    return distance == 0
 
 def dist():
     """
