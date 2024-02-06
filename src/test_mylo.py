@@ -62,6 +62,39 @@ def dist():
         if i%30 == 0:
             print(i+1, rows[i].cells, round(rows[i].dist(r1, d),2))
 
+def test_sym_dist_both_unknown():
+    """
+    Tests that the sym.dist function is working as expected when 2 "?" values are input
+    """
+    n = Sym()
+    print(n.dist("?","?") == 1)
+    return n.dist("?","?") == 1
+
+
+def test_sym_dist_one_unknown():
+    """
+    Tests that sym.dist works as expected when only one value is unknown
+    """
+    n = Sym()
+    print(n.dist("A","?") == 1)
+    return n.dist("A","?") == 1
+
+def test_sym_dist_both_known_and_equal():
+    """
+    Tests that sym dist works when both x and y are known and are equal
+    """
+    n = Sym()
+    print(n.dist("A","A") == 0)
+    return n.dist("A","A") == 0
+
+def test_sym_dist_both_known_and_not_equal():
+    """
+    Tests that sym dist works when both x and y are known and are not equal
+    """
+    n = Sym()
+    print(n.dist("A","B") == 1)
+    return n.dist("A","B") == 1
+
 def test_num_dist_both_unknown():
     """
     Tests that the num.dist function is working as expected when 2 "?" values are input
@@ -107,4 +140,7 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2}))
-    far()
+    test_sym_dist_both_unknown()
+    test_sym_dist_one_unknown()
+    test_sym_dist_both_known_and_equal()
+    test_sym_dist_both_known_and_not_equal()
