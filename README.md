@@ -87,6 +87,17 @@ Answer:
 
 Our sample data shows that SMO does quite well. It often produces optimal rows nearly equal to the absolute best row calculated by evaluating all y values. For example, look at [this](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L887) row calculated by SMO. When compared to the [perfect row](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L727) it's actually quite close. Even despite not being quite as perfect as the absolute best row, SMO can calculate these optimal rows in a fraction of the time. This is especially apparent when you consider that in the real world, evaluating each y-value may take a significant amount of time, and using SMO reduces the number of y-value evaluations significantly.
 
+### HW5
+#### Task 1
+To run the 'Distance' function:
+```
+python mylo.py -t dist
+```
+#### Task 2
+To run the 'Far' using fastmap heuristic:
+```
+python mylo.py -t far  
+```
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
