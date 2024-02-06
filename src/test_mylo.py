@@ -50,20 +50,6 @@ def egs():
         print("python mylo.py -t " + test_name)
     return True 
 
-
-
-# function to automatically load all functions in this module in test variable
-for (k, v) in list(locals().items()):
-    if callable(v) and v.__module__ == __name__:
-        tests[k] = v
-
-
-def _run(t_name):
-    if t_name in tests:
-        return tests[t_name]()
-    else:
-        return None
-
 def dist():
     """
     Prints the first row, sorts all the rows based on their distance to the first row,
@@ -74,7 +60,7 @@ def dist():
     rows = r1.neighbors(d)
     for i in range(len(rows)):
         if i%30 == 0:
-            print(i, rows[i].cells, round(rows[i].dist(r1, d),2))
+            print(i+1, rows[i].cells, round(rows[i].dist(r1, d),2))
 
 def test_num_dist_both_unknown():
     """
@@ -104,6 +90,19 @@ def test_num_dist_both_known():
         n.add(i)  # adding nums from 1 to 10
     assert n.dist(6, 5) == (5 / 9 + 1E-30) - (4 / 9 + 1E-30)  # should be the exact output
     assert n.dist(5, 6) == abs((4 / 9 + 1E-30)-(5 / 9 + 1E-30))
+
+# function to automatically load all functions in this module in test variable
+for (k, v) in list(locals().items()):
+    if callable(v) and v.__module__ == __name__:
+        tests[k] = v
+
+# -- Functions below this will not be loaded as a test
+
+def _run(t_name):
+    if t_name in tests:
+        return tests[t_name]()
+    else:
+        return None
 
 if __name__ == '__main__':
     #all()
