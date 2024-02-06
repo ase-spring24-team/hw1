@@ -1,4 +1,4 @@
-# Automated Software Engineering - Homework Week 2
+# Automated Software Engineering - Homework
 
 ## Quick Guide
 To run use the following commands:
