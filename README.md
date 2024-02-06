@@ -5,6 +5,7 @@ To run use the following commands:
 ```
 cd src
 ```
+#### `gate.py`
 Usage: 
 ```
 python gate.py [OPTIONS]
@@ -32,6 +33,42 @@ To run all tests:
 ```
 python gate.py -t all
 ```
+#### `mylo.py`
+Usage: 
+```
+python mylo.py [OPTIONS]
+```
+
+Options:
+```
+    -b --bins   max number of bins              = 16
+    -B --Beam   max number of ranges            = 10
+    -c --cohen  small effect size               = .35
+    -C --Cut    ignore ranges less than C*max   = .1
+    -d --d      frist cut                       = 32
+    -D --D      second cut                      = 4
+    -f --file   csv data file name              = ../data/diabetes.csv
+    -F --Far    how far to search for faraway?  = .95
+    -h --help   show help                       = False
+    -H --Half   #items to use in clustering     = 256
+    -p --p      weights for distance            = 2
+    -s --seed   random number seed              = 31210
+    -S --Support coeffecient on best            = 2
+    -t --todo   start up action                 = help
+```
+To view help:
+```
+python mylo.py -h
+```
+To list all available tests:
+```
+python mylo.py -t egs
+```
+To run all tests:
+```
+python mylo.py -t all
+```
+
 
 ## Homework Tasks
 ### HW2
