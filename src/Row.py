@@ -23,6 +23,7 @@ class Row:
             if most is None or tmp > most:
                 most, out = tmp, k
         return out, most
+    
     def like(self, data, n, nHypotheses):
         """
         Checks how much ROW like 'self'.

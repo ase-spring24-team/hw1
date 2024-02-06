@@ -34,10 +34,10 @@ def help():
     return True
 
 def far():
-    d  = Data.new("../data/auto93.csv")
+    d  = Data("../data/auto93.csv")
     far = d.farapart(d.rows)
-    print("far1: ", far[0])
-    print("far2: ", far[1])
+    print("far1: ", l.o(far[0]))
+    print("far2: ", l.o(far[1]))
     print("distance = ", far[2])
 
 def egs():
@@ -107,6 +107,4 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2}))
-    test_num_dist_one_unknown()
-    test_num_dist_both_unknown()
-    test_num_dist_both_known()
+    far()

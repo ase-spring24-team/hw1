@@ -419,6 +419,7 @@ def test_likes():
             print(normalized_no)
             print(k,m)
             print()
+
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
