@@ -147,6 +147,11 @@ def test_num_dist_both_known():
     assert n.dist(6, 5) == (5 / 9 + 1E-30) - (4 / 9 + 1E-30)  # should be the exact output
     assert n.dist(5, 6) == abs((4 / 9 + 1E-30)-(5 / 9 + 1E-30))
 
+def half():
+    d = Data("../data/auto93.csv")
+    lefts, rights, left, right, C, cut, evals = d.half(d.rows)
+    print(len(lefts), len(rights), l.o(left.cells), l.o(right.cells), l.o(C), l.o(cut), evals)
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
