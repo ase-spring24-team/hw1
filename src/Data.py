@@ -172,6 +172,12 @@ class Data:
                     u.append(col.div())
 
         return Row(u)
+    
+    def clone(self, rows = []):
+        new = Data([self.cols.names])
+        for row in rows:
+            new.add(row)
+        return new
 
     def split(self, best, rest, lite, dark):
         selected = Data([self.cols.names])
@@ -373,3 +379,22 @@ class Data:
         if sortp and b.d2h(self) < a.d2h(self):
             a, b = b, a
         return (a, b, a.dist(b, self), evals)
+    
+    def half(self, rows, sortp = None, before  = None):
+        some = random.sample(rows, min(the.Half, len(rows)))
+        a, b, C, evals = self.farapart(some, sortp, before)
+        def d(row1, row2):
+            return row1.dist(row2, self)
+        def project(r):
+            return (d(r,a)**2 + C**2 -d(r,b)**2)/(2*C)
+        _as, _bs = [], []
+        rows = rows.copy()
+        rows.sort(key=project)
+        for (n, row) in enumerate(rows):
+            if n <= len(rows) // 2:
+                _as.append(row)
+            else:
+                _bs.append(row)
+        return (_as, _bs, a, b, C, d(a, _bs[1]), evals) 
+
+
