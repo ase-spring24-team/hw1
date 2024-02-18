@@ -7,12 +7,12 @@ class Node:
     def __init__(self, data):
         self.here = data
         # Declare our class variables to be edited later
-        self.left
-        self.right
-        self.C
-        self.cut
-        self.lefts
-        self.rights
+        self.left = None
+        self.right = None
+        self.C = None
+        self.cut = None
+        self.lefts = None
+        self.rights = None
 
     def walk(self, fun, depth=0):
         """

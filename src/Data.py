@@ -405,7 +405,7 @@ class Data:
         :param sortp: Boolean, true if sorted? I think...
         """
         evals = 0
-        def _tree(data,above):
+        def _tree(data,above = None):
             """
             Recursive tree function
             :param data:
