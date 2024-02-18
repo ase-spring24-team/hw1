@@ -157,6 +157,19 @@ def tree():
     t.show()
     print(evals)
 
+def branch():
+    d = Data("../data/auto93.csv")
+    best, rest, evals = d.branch()
+    print(l.o(best.mid().cells), l.o(rest.mid().cells))
+    print(evals)
+
+def double_tap():
+    d = Data("../data/auto93.csv")
+    best1, rest, evals1 = d.branch(32)
+    best2, _,    evals2 = best1.branch(4)
+    print(l.o(best2.mid().cells), l.o(rest.mid().cells))
+    print(evals1+evals2)
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:

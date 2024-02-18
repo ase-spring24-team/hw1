@@ -421,3 +421,17 @@ class Data:
             return node
         return _tree(self), evals
 
+    def branch(self, stop):
+        evals, rest = 1, []
+        stop = stop or (2*(len(self.rows)) ** 0.5)
+        def _branch( data, above):
+            if len(self.rows) > stop:
+                lefts, rights, left = self.half(data.rows, True, above)[:3]
+                evals += 1
+                for row in rights:
+                    rest.append(row)
+                return _branch(data.clone(lefts, left))
+            else:
+                return self.clone(data.rows), self.clone(rest), evals
+        return _branch(self)
+
