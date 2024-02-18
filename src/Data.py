@@ -6,7 +6,9 @@ import random  # for our shuffling
 from Row import Row  # Imports the Row class from the Row file
 from util import csv, rnd  # Imports the csv function from util
 from Cols import Cols  # Imports the Cols class
+from Node import Node # Imports the Node class
 from the import the
+
 
 
 class Data:
@@ -397,4 +399,25 @@ class Data:
                 _bs.append(row)
         return (_as, _bs, a, b, C, d(a, _bs[1]), evals) 
 
+    def tree(self, sortp):
+        """
+        Recursive random projects. 'Half' then data, then recurse on each half.
+        :param sortp: Boolean, true if sorted? I think...
+        """
+        evals = 0
+        def _tree(data,above):
+            """
+            Recursive tree function
+            :param data:
+            :param above:
+            """
+            node = Node(data)
+            if len(data.rows) > 2*(len(self.rows))**.5:
+                lefts, rights, node.left, node.right, node.C, node.cut, evals1 = self.half(data.rows, sortp, above)
+                nonlocal evals
+                evals = evals + evals1
+                node.lefts = _tree(self.clone(lefts), node.left)
+                node.rights = _tree(self.clone(rights), node.right)
+            return node
+        return _tree(self), evals
 

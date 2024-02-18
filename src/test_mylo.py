@@ -152,6 +152,11 @@ def half():
     lefts, rights, left, right, C, cut, evals = d.half(d.rows)
     print(len(lefts), len(rights), l.o(left.cells), l.o(right.cells), l.o(C), l.o(cut), evals)
 
+def tree():
+    t, evals = Data("../data/auto93.csv").tree(True)
+    t.show()
+    print(evals)
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -168,7 +173,10 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2}))
+    tree()
+    """
     test_sym_dist_both_unknown()
     test_sym_dist_one_unknown()
     test_sym_dist_both_known_and_equal()
     test_sym_dist_both_known_and_not_equal()
+    """
