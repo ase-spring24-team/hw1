@@ -155,7 +155,7 @@ def half():
 def tree():
     t, evals = Data("../data/auto93.csv").tree(True)
     t.show()
-    print(evals)
+    print("Evals:", evals)
 
 def branch():
     d = Data("../data/auto93.csv")

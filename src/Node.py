@@ -49,13 +49,19 @@ class Node:
             :param depth: Int, the current depth we are at in our tree
             :param leafp: Boolean, true if we are at a leaf node, else false
             """
-            post = f"{d2h(node.here)}\t{node.here.mid().cells}" if leafp else f""
+            print_cells = node.here.mid().cells
+            for i in range(len(print_cells)):
+                print_cells[i] = round(print_cells[i], 2)
+            post = f"{d2h(node.here)} \t{print_cells}" if leafp else f""
             nonlocal maxDepth  ## asscoiates this maxDepth with the maxDepth above the _show
             maxDepth = max(maxDepth, depth)
             print(f"{'|.. '*depth}{post}")  # print it out!
 
         self.walk(_show)
         print("")
-        print(f"{'   '*maxDepth} {d2h(self.here)} {self.here.mid().cells}")
-        print(f"{'   '*maxDepth} - {self.here.cols.names}")
+        print_cells = self.here.mid().cells
+        for i in range(len(print_cells)):
+            print_cells[i] = round(print_cells[i], 2)  # round all values by 2 decimal places
+        print(f"{'    '*maxDepth} {d2h(self.here)} {print_cells}")
+        print(f"{'    '*maxDepth} ---- {self.here.cols.names}")
 
