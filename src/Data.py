@@ -388,7 +388,7 @@ class Data:
         def d(row1, row2):
             return row1.dist(row2, self)
         def project(r):
-            return (d(r,a)**2 + C**2 -d(r,b)**2)/(2*C)
+            return (d(r,a)**2 + C**2 -d(r,b)**2)/(2*C) if C != 0 else float("inf")
         _as, _bs = [], []
         rows = rows.copy()
         rows.sort(key=project)
@@ -424,9 +424,9 @@ class Data:
     def branch(self, stop = None):
         evals, rest = 1, []
         stop = stop or (2*(len(self.rows)) ** 0.5)
-        def _branch( data, above = None):
+        def _branch(data, above = None):
             nonlocal evals
-            if len(self.rows) > stop:
+            if len(data.rows) > stop:
                 lefts, rights, left = self.half(data.rows, True, above)[:3]
                 evals += 1
                 for row in rights:

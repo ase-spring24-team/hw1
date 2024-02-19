@@ -155,13 +155,13 @@ def half():
 def tree():
     t, evals = Data("../data/auto93.csv").tree(True)
     t.show()
-    print("Evals:", evals)
+    print("evals:", evals)
 
 def branch():
     d = Data("../data/auto93.csv")
     best, rest, evals = d.branch()
-    print(l.o(best.mid().cells), l.o(rest.mid().cells))
-    print(evals)
+    print(list(map(lambda v: round(v, 2), best.mid().cells)), list(map(lambda v: round(v, 2), rest.mid().cells)))
+    print("evals:", evals)
 
 def double_tap():
     d = Data("../data/auto93.csv")
