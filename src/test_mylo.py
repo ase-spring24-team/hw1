@@ -176,7 +176,6 @@ for (k, v) in list(locals().items()):
         tests[k] = v
 
 # -- Functions below this will not be loaded as a test
-
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -186,7 +185,7 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95}))
-    tree()
+    branch()
     """
     test_sym_dist_both_unknown()
     test_sym_dist_one_unknown()
