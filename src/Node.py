@@ -2,6 +2,8 @@
 File by Samuel Kwiatkowski-Martin
 This file is our Node class, which will be used to help with recursive random projection
 """
+import math # for testing purposes
+
 
 class Node:
     def __init__(self, data):
@@ -56,8 +58,10 @@ class Node:
             nonlocal maxDepth  ## asscoiates this maxDepth with the maxDepth above the _show
             maxDepth = max(maxDepth, depth)
             print(f"{'|.. '*depth}{post}")  # print it out!
-
         self.walk(_show)
+        # test that the max depth of recursive tree doesn't go above log2(N) where N is
+        # the number of data points
+        assert maxDepth <= math.log2(len(self.here.rows))
         print("")
         print_cells = self.here.mid().cells
         for i in range(len(print_cells)):

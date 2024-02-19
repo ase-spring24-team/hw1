@@ -6,6 +6,7 @@ from the import THE, the, SLOTS
 from Data import Data
 from Num import Num
 from Sym import Sym
+from Node import Node
 import util as l
 
 tests = {}
@@ -170,6 +171,20 @@ def double_tap():
     print(l.o(best2.mid().cells), l.o(rest.mid().cells))
     print(evals1+evals2)
 
+def test_node_init():
+    """
+    Tests that all of the attributes of the node class are initialized correctly
+    """
+    d = Data("../data/auto93.csv")
+    node = Node(d)
+    assert node.here == d
+    assert node.left is None
+    assert node.right is None
+    assert node.C is None
+    assert node.cut is None
+    assert node.lefts is None
+    assert node.rights is None
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -185,7 +200,9 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95}))
-    branch()
+    #branch()
+    tree()
+    test_node_init()
     """
     test_sym_dist_both_unknown()
     test_sym_dist_one_unknown()
