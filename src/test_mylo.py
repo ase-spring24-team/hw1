@@ -187,6 +187,11 @@ def test_data_clone():
     print("Comparing Rows: All rows are cloned correctly")
     return True
 
+def test_evals():
+    d = Data("../data/auto93.csv")
+    _, _, evals = d.branch()
+    return evals > 0
+
 def test_node_init():
     """
     Tests that all of the attributes of the node class are initialized correctly
@@ -216,12 +221,4 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95}))
-    #branch()
-    #tree()
-    test_data_clone()
-    """
-    test_sym_dist_both_unknown()
-    test_sym_dist_one_unknown()
-    test_sym_dist_both_known_and_equal()
-    test_sym_dist_both_known_and_not_equal()
-    """
+    
