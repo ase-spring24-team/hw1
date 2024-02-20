@@ -171,6 +171,22 @@ def double_tap():
     print(l.o(best2.mid().cells), l.o(rest.mid().cells))
     print(evals1+evals2)
 
+def test_data_clone():
+    d = Data("../data/auto93.csv")
+    d_clone = d.clone(d.rows)
+    print("Comparing Column", d.cols.names, "==" ,d_clone.cols.names, ":", d.cols.names == d_clone.cols.names)
+    if d.cols.names != d_clone.cols.names:
+        print("Data not cloned correctly: Columns differ")
+        return False
+    if len(d.rows) != len(d_clone.rows):
+        print("Data not cloned correctly: Row length different")
+    for i in range(len(d.rows)):
+        if d.rows[i] != d_clone.rows[i]:
+            print("Data not cloned correctly: Row", i, "not same")
+            return False
+    print("Comparing Rows: All rows are cloned correctly")
+    return True
+
 def test_node_init():
     """
     Tests that all of the attributes of the node class are initialized correctly
@@ -201,8 +217,8 @@ if __name__ == '__main__':
     #all()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95}))
     #branch()
-    tree()
-    test_node_init()
+    #tree()
+    test_data_clone()
     """
     test_sym_dist_both_unknown()
     test_sym_dist_one_unknown()
