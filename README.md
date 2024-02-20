@@ -71,13 +71,13 @@ python mylo.py -t all
 
 
 ## Homework Tasks
-### HW2
+### HW2 (Week 2)
 #### Task 1
 To get the stats:
 ```
  python gate.py -f ../data/auto93.csv -t stats
 ```
-### HW3
+### HW3 (Week 3)
 #### Task 1
 To print the little ascii table:
 ```
@@ -97,7 +97,7 @@ python gate.py -t km
 - Recommended low frequency settings for `soybean.csv` are `k=2` and `m=1`, as they return the best accuracy of 85%.
 - Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
 
-### HW4
+### HW4 (Week 4)
 To execute the SMO using gate function 20 times:
 ```
 python gate.py -t gate20
@@ -124,7 +124,7 @@ Answer:
 
 Our sample data shows that SMO does quite well. It often produces optimal rows nearly equal to the absolute best row calculated by evaluating all y values. For example, look at [this](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L887) row calculated by SMO. When compared to the [perfect row](https://github.com/ase-spring24-team/hw1/blob/486b3803628fcd86753fdf7f23e3ac5a1fcb8804/hw/w4/gate20.out#L727) it's actually quite close. Even despite not being quite as perfect as the absolute best row, SMO can calculate these optimal rows in a fraction of the time. This is especially apparent when you consider that in the real world, evaluating each y-value may take a significant amount of time, and using SMO reduces the number of y-value evaluations significantly.
 
-### HW5
+### HW5 (Week 5)
 #### Task 1
 To run the 'Distance' function:
 ```
@@ -135,6 +135,24 @@ To run the 'Far' using fastmap heuristic:
 ```
 python mylo.py -t far  
 ```
+
+### HW5 (Week 7)
+#### Task 1
+To run the Recursive random projections to generate Clusters:
+```
+python mylo.py -t tree 
+```
+#### Task 2
+To run the Single descent:
+```
+python mylo.py -t branch 
+```
+#### Task 3
+To run Double Tap:
+```
+python mylo.py -t double_tap  
+```
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
