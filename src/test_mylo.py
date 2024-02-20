@@ -151,7 +151,7 @@ def test_num_dist_both_known():
 def half():
     d = Data("../data/auto93.csv")
     lefts, rights, left, right, C, cut, evals = d.half(d.rows)
-    print(len(lefts), len(rights), l.o(left.cells), l.o(right.cells), l.o(C), l.o(cut), evals)
+    print(len(lefts), len(rights), l.rnd_list(left.cells), l.rnd_list(right.cells), l.rnd(C), l.rnd(cut), evals)
 
 def tree():
     t, evals = Data("../data/auto93.csv").tree(True)
@@ -161,14 +161,14 @@ def tree():
 def branch():
     d = Data("../data/auto93.csv")
     best, rest, evals = d.branch()
-    print(list(map(lambda v: round(v, 2), best.mid().cells)), list(map(lambda v: round(v, 2), rest.mid().cells)))
+    print(l.rnd_list(best.mid().cells), l.rnd_list(rest.mid().cells))
     print("evals:", evals)
 
 def double_tap():
     d = Data("../data/auto93.csv")
     best1, rest, evals1 = d.branch(32)
     best2, _,    evals2 = best1.branch(4)
-    print(l.o(best2.mid().cells), l.o(rest.mid().cells))
+    print(l.rnd_list(best2.mid().cells), l.rnd_list(rest.mid().cells))
     print(evals1+evals2)
 
 def test_data_clone():
