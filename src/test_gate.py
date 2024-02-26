@@ -12,7 +12,7 @@ from util import norm, rnd
 import util as l
 from the import THE, the, SLOTS
 import random
-from statistics import mean
+from statistics import mean, stdev
 
 tests = {}
 
@@ -453,7 +453,7 @@ def get_base_line_list(rows,d):
         d2h_list.append(row.d2h(d))
     return d2h_list
 
-def print_ranking_analysis(d, ceiling):
+def print_ranking_analysis(d, ceiling, std):
     """
     Prints out the ranking analysis
     """
@@ -469,7 +469,7 @@ def print_ranking_analysis(d, ceiling):
     print(f"Rows : {len(d.rows)}")
     print(f"Columns : {len(d.cols.all)}")
     print(f"Best : {ceiling}")  #
-    print(f"Tiny : .35*")  # WE NEED to change this later...
+    print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
 def test_ranking_stats_smo():
     """
@@ -501,7 +501,8 @@ def test_ranking_stats_smo():
         rand20_best_list.append(get_best_rand(20))
         rand358_best_list.append(get_best_rand(358))
     base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
-    print_ranking_analysis(d, ceiling)
+    std = stdev(base_line_list)  # standard deviation of all rows d2h values
+    print_ranking_analysis(d, ceiling, std)
 
     print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
     print("Ranking Report: ")
