@@ -6,6 +6,8 @@ from Data import Data
 from Row import Row
 from Num import Num
 from Sym import Sym
+import Sample
+from datetime import date
 from util import norm, rnd
 import util as l
 from the import THE, the, SLOTS
@@ -420,6 +422,31 @@ def test_likes():
             print(k,m)
             print()
 
+def test_ranking_stats_smo():
+    """
+    Runs smo bonr and rand and assembles groups of best solutions based on these runs, then
+    it stratifies each group into rankings to see if each group is significantly different from
+    each other or not
+    """
+    d = Data("../data/auto93.csv")
+    _stats, _bests = d.gate(4, 16, .5)
+    stat, best = _stats[-1], _bests[-1]
+    print()
+    print("Starting ranking analysis...")
+    # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
+    today = date.today()
+    todays_date = today.strftime("%B %d, %Y")
+    print(f"Date : {todays_date}")  # print current date
+    print(f"File : ../data/auto93.csv")   # print file name
+    print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
+    # when building our sampling group for example)
+    print(f"Seed : {the.seed}")
+    print(f"Rows : {len(d.rows)}")
+    print(f"Columns : {len(d.cols.all)}")
+    print(f"Best : {l.rnd(best.d2h(d))}")
+    print(f"Tiny : .35*")  # WE NEED to change this later...
+
+
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -428,7 +455,8 @@ def _run(t_name):
 
 if __name__ == '__main__':
     #all()
-    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1}))
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "seed":31210}))
+    random.seed(the.seed)
     #ascii_table("../data/soybean.csv")
     #km()
     #bayes()
@@ -438,4 +466,5 @@ if __name__ == '__main__':
     #test_d2h_sort()
     #test_best_less_than_rest()
     #gate20()
-    test_d2h2()
+    #test_d2h2()
+    test_ranking_stats_smo()
