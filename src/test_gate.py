@@ -352,6 +352,46 @@ def test_d2h_sort():
     print("The rows are sorted based on d2h value")
     return True
 
+def smo_exp():
+    print("Date:", datetime.now())
+    print("File:", the.file)
+    repeats = 20
+    print("repeats:", repeats)
+    print("seed:", the.seed)
+    random.seed(the.seed)
+    d = Data(the.file)
+    print("rows:", len(d.rows))
+    print("cols:", len(d.cols.names))
+
+    # print column names
+    print("names\t", d.cols.names, "\tD2h")
+
+    # print mid and div
+    mid = d.mid()
+    print("mid\t", l.rnd_list(mid.cells), "\t", l.rnd(mid.d2h(d)))
+    div = d.div()
+    print("div\t", l.rnd_list(div.cells), "\t", l.rnd(div.d2h(d)))
+
+    # Run smo9 20 times and print the best value in each iteration
+    print("#")
+    for i in range(20):
+        _stats, _best = d.gate(4, 9, .5, False)
+        print("smo9\t", _best[-1].cells, "\t", l.rnd(_best[-1].d2h(d)))
+
+    # Pick 50 random and get the best (20 iterations)
+    print("#")
+    for i in range(20):
+        rows = random.sample(d.rows, 10)
+        rows.sort(key=lambda x: x.d2h(d))
+        print("any50\t", rows[0].cells, "\t", l.rnd(rows[0].d2h(d)))
+
+    # Evaluate all data to find the best
+    print("#")
+    rows = d.rows.copy() # create a shallow copy of the array (to sort)
+    rows.sort(key=lambda x: x.d2h(d))
+    print("100%\t", rows[0].cells, "\t", l.rnd(rows[0].d2h(d)))
+    
+
 def test_b_and_r():
     """
     Tests if the sorting using d2h values is done right
@@ -568,4 +608,4 @@ if __name__ == '__main__':
     #gate20()
     #test_d2h2()
     #test_bonr_better_than_base()
-    test_ranking_stats_smo()
+    smo_exp()
