@@ -424,7 +424,7 @@ def test_likes():
 
 def get_best_bonr(num):
     """
-    Runs bonr9 once and returns the best d2h value found
+    Runs bonrN once and returns the best d2h value found
     """
     d = Data(the.file)
     _stats, _bests = d.gate(4, num-4, .5, False) # bonr9 if num = 9, bonr15 if num = 15 etc.
@@ -433,6 +433,33 @@ def get_best_bonr(num):
     stat, best = _stats[-1], _bests[-1]
     return l.rnd(best.d2h(d))
 
+def get_best_rand(num):
+    """
+    Runs randN once and returns the best d2h value found for the sample of num numbers
+    """
+    d = Data(the.file)
+    rows = random.sample(d.rows, num)  # sample N number of random rows
+    rows.sort(key=lambda x: x.d2h(d))  # sort the rows by d2h and pull out the best value
+    return l.rnd(rows[0].d2h(d))  # return the d2h of the best row
+
+def print_ranking_analysis(d, ceiling):
+    """
+    Prints out the ranking analysis
+    """
+    print("Starting ranking analysis...")
+    # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
+    today = date.today()
+    todays_date = today.strftime("%B %d, %Y")
+    print(f"Date : {todays_date}")  # print current date
+    print(f"File : {the.file}")  # print file name
+    print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
+    # when building our sampling group for example)
+    print(f"Seed : {the.seed}")
+    print(f"Rows : {len(d.rows)}")
+    print(f"Columns : {len(d.cols.all)}")
+    print(f"Best : {ceiling}")  #
+    print(f"Tiny : .35*")  # WE NEED to change this later...
+
 def test_ranking_stats_smo():
     """
     Runs smo bonr and rand and assembles groups of best solutions based on these runs, then
@@ -440,39 +467,44 @@ def test_ranking_stats_smo():
     each other or not
     """
     d = Data(the.file)  # just set d for easy use in print statements
+    all_rows = d.rows
+    # Now we must sort all rows based on the distance to heaven to get our ceiling
+    all_rows.sort(key=lambda x: x.d2h(d))
+    ceiling = l.rnd(all_rows[0].d2h(d))  # set ceiling value to best value
     bonr9_best_list = []  # the list of 20 best bonr9 value
+    rand9_best_list = []  # the list of 20 best rand9 value
     bonr15_best_list = []
+    rand15_best_list = []
     bonr20_best_list = []
+    rand20_best_list = []
+    rand358_best_list = []
     for i in range(20):
         # iterate our 20 times
         bonr9_best_list.append(get_best_bonr(9))  # calls to a function that runs data for bonr9
         # and returns the best value once
+        rand9_best_list.append(get_best_rand(9))  # calls to function which randomly samples
+        # 9 rows from the data set and returns the best rows d2h
         bonr15_best_list.append(get_best_bonr(15))
+        rand15_best_list.append(get_best_rand(15))
         bonr20_best_list.append(get_best_bonr(20))
+        rand20_best_list.append(get_best_rand(20))
+        rand358_best_list.append(get_best_rand(358))
 
-    print()
-    print("Starting ranking analysis...")
-    # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
-    today = date.today()
-    todays_date = today.strftime("%B %d, %Y")
-    print(f"Date : {todays_date}")  # print current date
-    print(f"File : {the.file}")   # print file name
-    print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
-    # when building our sampling group for example)
-    print(f"Seed : {the.seed}")
-    print(f"Rows : {len(d.rows)}")
-    print(f"Columns : {len(d.cols.all)}")
-    print(f"Best : ")  # I will need to set the ceiling baseline for this
-    print(f"Tiny : .35*")  # WE NEED to change this later...
-    """
-    eg0([
-        SAMPLE([0.34, 0.49, 0.51, 0.6], "base"),
-        SAMPLE(bonr9_best_list, "bonr9"),
-        SAMPLE([0.13, 0.23, 0.38, 0.38], "rand9"),
-        SAMPLE(bonr15_best_list, "bonr15"),
-        SAMPLE(bonr20_best_list, "bonr20"),
+    print_ranking_analysis(d, ceiling)
+
+    print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
+    print("Ranking Report: ")
+    #  Below is the code that will actually stratify and print the different treatments
+    Sample.eg0([
+        Sample.SAMPLE(bonr9_best_list, "bonr9"),
+        Sample.SAMPLE(rand9_best_list, "rand9"),
+        Sample.SAMPLE(bonr15_best_list, "bonr15"),
+        Sample.SAMPLE(rand15_best_list, "rand15"),
+        Sample.SAMPLE(bonr20_best_list, "bonr20"),
+        Sample.SAMPLE(rand20_best_list, "rand20"),
+        Sample.SAMPLE(rand358_best_list, "rand358"),
     ])
-    """
+
     # base #bonr9 #rand9 #bonr15 #rand15 #bonr20 #rand20 #rand358
     # report8
 
