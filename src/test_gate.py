@@ -410,10 +410,12 @@ def test_ranking_stats_smo():
     each other or not
     """
     d = Data(the.file)  # just set d for easy use in print statements
+    print_ranking_analysis(d)
     all_rows = d.rows
     # Now we must sort all rows based on the distance to heaven to get our ceiling
     all_rows.sort(key=lambda x: x.d2h(d))
     ceiling = l.rnd(all_rows[0].d2h(d))  # set ceiling value to best value
+    print(f"Best : {ceiling}")  #
     bonr9_best_list = []  # the list of 20 best bonr9 value
     rand9_best_list = []  # the list of 20 best rand9 value
     bonr15_best_list = []
@@ -433,8 +435,8 @@ def test_ranking_stats_smo():
         rand20_best_list.append(get_best_rand(20))
         rand358_best_list.append(get_best_rand(358))
     base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
-    std = stdev(base_line_list)  # standard deviation of all rows d2h values
-    print_ranking_analysis(d, ceiling, std)
+    std = stdev(base_line_list)  # standard deviation of all rows d2h values    
+    print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
     print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
     print("Ranking Report: ")
@@ -529,7 +531,7 @@ def get_base_line_list(rows,d):
         d2h_list.append(row.d2h(d))
     return d2h_list
 
-def print_ranking_analysis(d, ceiling, std):
+def print_ranking_analysis(d):
     """
     Prints out the ranking analysis
     """
@@ -544,8 +546,6 @@ def print_ranking_analysis(d, ceiling, std):
     print(f"Seed : {the.seed}")
     print(f"Rows : {len(d.rows)}")
     print(f"Columns : {len(d.cols.all)}")
-    print(f"Best : {ceiling}")  #
-    print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
 def _run(t_name):
     if t_name in tests:
@@ -568,4 +568,4 @@ if __name__ == '__main__':
     #gate20()
     #test_d2h2()
     #test_bonr_better_than_base()
-    smo_exp()
+    test_ranking_stats_smo()
