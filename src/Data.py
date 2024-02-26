@@ -326,7 +326,7 @@ class Data:
             print(f"{rnd(row.cells[i_var_indices[j]])}", end=' ')
         print()
 
-    def gate(self, budget0, budget, some, test_name=""):
+    def gate(self, budget0, budget, some, print_baselines=True, test_name=""):
         """
         This function guesses, accesses, transforms the data, and then evaluates
         :param budget0: initial number of rows to be evaluated
@@ -336,14 +336,16 @@ class Data:
         """
         stats = []
         bests = []
-        rows = random.sample(self.rows, len(self.rows))  # shuffles rows
-        self.baseline1_2(rows, 6, 1)   # baseline #1
-        self.baseline1_2(rows, 50, 2)  # baseline #2
+        if print_baselines:
+            # Only print the baselines if we need to
+            rows = random.sample(self.rows, len(self.rows))  # shuffles rows
+            self.baseline1_2(rows, 6, 1)   # baseline #1
+            self.baseline1_2(rows, 50, 2)  # baseline #2
 
-        # Now we must sort rows based on the distance to heaven -- will fix this once d2h is done
-        rows.sort(key=lambda x: x.d2h(self))
-        # print some stuff...
-        self.baseline3(rows[0])  # baseline 3
+            # Now we must sort rows based on the distance to heaven -- will fix this once d2h is done
+            rows.sort(key=lambda x: x.d2h(self))
+            # print some stuff...
+            self.baseline3(rows[0])  # baseline 3
 
         rows = random.sample(self.rows, len(self.rows))  # reshuffle rows
         if test_name == "shuffle":
@@ -361,11 +363,12 @@ class Data:
             # ngl I'm not sure what the point of the following 2 lines is
             stats.append(selected.mid())
             bests.append(best.rows[0])
-
-            print(f"Budget {i} :", end='\n')
-            self.baseline4(budget0, i, dark)
-            self.baseline5(i, selected.mid())
-            self.baseline6(i, best.rows[0])
+            if print_baselines:
+                # again only print baselines if we need to
+                print(f"Budget {i} :", end='\n')
+                self.baseline4(budget0, i, dark)
+                self.baseline5(i, selected.mid())
+                self.baseline6(i, best.rows[0])
             
 
             # Insert into the lite, the most confusing example from dark(also remove the val from

@@ -422,30 +422,59 @@ def test_likes():
             print(k,m)
             print()
 
+def get_best_bonr(num):
+    """
+    Runs bonr9 once and returns the best d2h value found
+    """
+    d = Data(the.file)
+    _stats, _bests = d.gate(4, num-4, .5, False) # bonr9 if num = 9, bonr15 if num = 15 etc.
+    # I also added a parameter above so that we don't have to always print all the baselines
+    # when running gate
+    stat, best = _stats[-1], _bests[-1]
+    return l.rnd(best.d2h(d))
+
 def test_ranking_stats_smo():
     """
     Runs smo bonr and rand and assembles groups of best solutions based on these runs, then
     it stratifies each group into rankings to see if each group is significantly different from
     each other or not
     """
-    d = Data("../data/auto93.csv")
-    _stats, _bests = d.gate(4, 16, .5)
-    stat, best = _stats[-1], _bests[-1]
+    d = Data(the.file)  # just set d for easy use in print statements
+    bonr9_best_list = []  # the list of 20 best bonr9 value
+    bonr15_best_list = []
+    bonr20_best_list = []
+    for i in range(20):
+        # iterate our 20 times
+        bonr9_best_list.append(get_best_bonr(9))  # calls to a function that runs data for bonr9
+        # and returns the best value once
+        bonr15_best_list.append(get_best_bonr(15))
+        bonr20_best_list.append(get_best_bonr(20))
+
     print()
     print("Starting ranking analysis...")
     # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
     today = date.today()
     todays_date = today.strftime("%B %d, %Y")
     print(f"Date : {todays_date}")  # print current date
-    print(f"File : ../data/auto93.csv")   # print file name
+    print(f"File : {the.file}")   # print file name
     print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
     # when building our sampling group for example)
     print(f"Seed : {the.seed}")
     print(f"Rows : {len(d.rows)}")
     print(f"Columns : {len(d.cols.all)}")
-    print(f"Best : {l.rnd(best.d2h(d))}")
+    print(f"Best : ")  # I will need to set the ceiling baseline for this
     print(f"Tiny : .35*")  # WE NEED to change this later...
-
+    """
+    eg0([
+        SAMPLE([0.34, 0.49, 0.51, 0.6], "base"),
+        SAMPLE(bonr9_best_list, "bonr9"),
+        SAMPLE([0.13, 0.23, 0.38, 0.38], "rand9"),
+        SAMPLE(bonr15_best_list, "bonr15"),
+        SAMPLE(bonr20_best_list, "bonr20"),
+    ])
+    """
+    # base #bonr9 #rand9 #bonr15 #rand15 #bonr20 #rand20 #rand358
+    # report8
 
 def _run(t_name):
     if t_name in tests:
