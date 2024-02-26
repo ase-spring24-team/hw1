@@ -442,6 +442,16 @@ def get_best_rand(num):
     rows.sort(key=lambda x: x.d2h(d))  # sort the rows by d2h and pull out the best value
     return l.rnd(rows[0].d2h(d))  # return the d2h of the best row
 
+def get_base_line_list(rows,d):
+    """
+    Takes a list of all rows in the data set d, and returns a list of all row's d2h values
+    :param rows: list of all rows in data d
+    """
+    d2h_list = []
+    for row in rows:
+        d2h_list.append(row.d2h(d))
+    return d2h_list
+
 def print_ranking_analysis(d, ceiling):
     """
     Prints out the ranking analysis
@@ -489,7 +499,7 @@ def test_ranking_stats_smo():
         bonr20_best_list.append(get_best_bonr(20))
         rand20_best_list.append(get_best_rand(20))
         rand358_best_list.append(get_best_rand(358))
-
+    base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
     print_ranking_analysis(d, ceiling)
 
     print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
@@ -503,6 +513,7 @@ def test_ranking_stats_smo():
         Sample.SAMPLE(bonr20_best_list, "bonr20"),
         Sample.SAMPLE(rand20_best_list, "rand20"),
         Sample.SAMPLE(rand358_best_list, "rand358"),
+        Sample.SAMPLE(base_line_list, "base"),
     ])
 
     # base #bonr9 #rand9 #bonr15 #rand15 #bonr20 #rand20 #rand358
