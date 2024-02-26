@@ -1,6 +1,5 @@
 # Automated Software Engineering - Homework
 ![Python](https://img.shields.io/badge/python-v3.10+-brightgreen.svg)
-![Lines of code](https://img.shields.io/tokei/lines/github/ase-spring24-team/hw1)
 ![Lines of code](https://tokei.rs/b1/github/ase-spring24-team/hw1)
 
 ## Quick Guide
