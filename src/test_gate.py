@@ -432,6 +432,10 @@ def get_best_bonr(num):
     # I also added a parameter above so that we don't have to always print all the baselines
     # when running gate
     stat, best = _stats[-1], _bests[-1]
+    #print(best.d2h(d))
+    #print(_bests[0].d2h(d))
+    assert best.d2h(d) <= _bests[0].d2h(d)  # Tests that we are getting the best value based on d2h
+    # and not some other value by accident
     return l.rnd(best.d2h(d))
 
 def get_best_rand(num):
