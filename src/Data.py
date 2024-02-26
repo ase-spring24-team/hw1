@@ -143,7 +143,7 @@ class Data:
 
         return Row(u)
 
-    def div(self, cols):
+    def div(self, cols = "all"):
         """
         Function returns the entropy/standard deviation of all or a selection of columns
         :param cols: A str that tells the function which columns to calculate on

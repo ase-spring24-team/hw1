@@ -7,7 +7,7 @@ from Row import Row
 from Num import Num
 from Sym import Sym
 import Sample
-from datetime import date
+from datetime import date, datetime
 from util import norm, rnd
 import util as l
 from the import THE, the, SLOTS
@@ -269,7 +269,7 @@ def test_heaven():
 
 def gate20():
     flag = True
-    for i in range(5):
+    for i in range(20):
         d = Data("../data/auto93.csv")
         _stats, _bests = d.gate(4, 16, .5)
         stat, best = _stats[-1], _bests[-1]
@@ -288,6 +288,7 @@ def test_20_shuffles():
         stat, best = _stats[-1], _bests[-1]
         print(best)
         print("gate20", l.rnd(best.d2h(d)), l.rnd(stat.d2h(d)))
+
 def test_best_less_than_rest():
     """
     Tests that best is always less then rest
@@ -351,7 +352,6 @@ def test_d2h_sort():
     print("The rows are sorted based on d2h value")
     return True
 
-
 def test_b_and_r():
     """
     Tests if the sorting using d2h values is done right
@@ -373,26 +373,6 @@ def test_b_and_r():
     else:
         print("The values of b and r are not numbers")
         return False
-
-
-# function to automatically load all functions in this module in test variable
-for (k, v) in list(locals().items()):
-    if callable(v) and v.__module__ == __name__:
-        tests[k] = v
-
-# -- Functions below this will not be loaded as a test
-
-def learn(data, row, my):
-    my.n += 1
-    kl = row.cells[data.cols.klass.at]
-    learned = False
-    if my.n > 0:
-        my.tries += 1
-        my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
-        learned = True
-    my.datas.setdefault(kl, Data([data.cols.names]))
-    test_learn(learned)
-    my.datas[kl].add(row)
 
 def test_learn(learned):
     """
@@ -422,58 +402,6 @@ def test_likes():
             print(normalized_no)
             print(k,m)
             print()
-
-def get_best_bonr(num):
-    """
-    Runs bonrN once and returns the best d2h value found
-    """
-    d = Data(the.file)
-    _stats, _bests = d.gate(4, num-4, .5, False) # bonr9 if num = 9, bonr15 if num = 15 etc.
-    # I also added a parameter above so that we don't have to always print all the baselines
-    # when running gate
-    stat, best = _stats[-1], _bests[-1]
-    #print(best.d2h(d))
-    #print(_bests[0].d2h(d))
-    assert best.d2h(d) <= _bests[0].d2h(d)  # Tests that we are getting the best value based on d2h
-    # and not some other value by accident
-    return l.rnd(best.d2h(d))
-
-def get_best_rand(num):
-    """
-    Runs randN once and returns the best d2h value found for the sample of num numbers
-    """
-    d = Data(the.file)
-    rows = random.sample(d.rows, num)  # sample N number of random rows
-    rows.sort(key=lambda x: x.d2h(d))  # sort the rows by d2h and pull out the best value
-    return l.rnd(rows[0].d2h(d))  # return the d2h of the best row
-
-def get_base_line_list(rows,d):
-    """
-    Takes a list of all rows in the data set d, and returns a list of all row's d2h values
-    :param rows: list of all rows in data d
-    """
-    d2h_list = []
-    for row in rows:
-        d2h_list.append(row.d2h(d))
-    return d2h_list
-
-def print_ranking_analysis(d, ceiling, std):
-    """
-    Prints out the ranking analysis
-    """
-    print("Starting ranking analysis...")
-    # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
-    today = date.today()
-    todays_date = today.strftime("%B %d, %Y")
-    print(f"Date : {todays_date}")  # print current date
-    print(f"File : {the.file}")  # print file name
-    print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
-    # when building our sampling group for example)
-    print(f"Seed : {the.seed}")
-    print(f"Rows : {len(d.rows)}")
-    print(f"Columns : {len(d.cols.all)}")
-    print(f"Best : {ceiling}")  #
-    print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
 def test_ranking_stats_smo():
     """
@@ -548,6 +476,77 @@ def test_bonr_better_than_base():
     for d2h_val in bonr20_best_list:
         assert d2h_val < base_line_d2h
 
+# function to automatically load all functions in this module in test variable
+for (k, v) in list(locals().items()):
+    if callable(v) and v.__module__ == __name__:
+        tests[k] = v
+
+# -- Functions below this will not be loaded as a test
+
+def learn(data, row, my):
+    my.n += 1
+    kl = row.cells[data.cols.klass.at]
+    learned = False
+    if my.n > 0:
+        my.tries += 1
+        my.acc += (1 if kl == row.likes(my.datas)[0] else 0) # usiing [0] as we are comparing 'kl' to only 'out' in Row.likes return
+        learned = True
+    my.datas.setdefault(kl, Data([data.cols.names]))
+    test_learn(learned)
+    my.datas[kl].add(row)
+
+def get_best_bonr(num):
+    """
+    Runs bonrN once and returns the best d2h value found
+    """
+    d = Data(the.file)
+    _stats, _bests = d.gate(4, num-4, .5, False) # bonr9 if num = 9, bonr15 if num = 15 etc.
+    # I also added a parameter above so that we don't have to always print all the baselines
+    # when running gate
+    stat, best = _stats[-1], _bests[-1]
+    #print(best.d2h(d))
+    #print(_bests[0].d2h(d))
+    assert best.d2h(d) <= _bests[0].d2h(d)  # Tests that we are getting the best value based on d2h
+    # and not some other value by accident
+    return l.rnd(best.d2h(d))
+
+def get_best_rand(num):
+    """
+    Runs randN once and returns the best d2h value found for the sample of num numbers
+    """
+    d = Data(the.file)
+    rows = random.sample(d.rows, num)  # sample N number of random rows
+    rows.sort(key=lambda x: x.d2h(d))  # sort the rows by d2h and pull out the best value
+    return l.rnd(rows[0].d2h(d))  # return the d2h of the best row
+
+def get_base_line_list(rows,d):
+    """
+    Takes a list of all rows in the data set d, and returns a list of all row's d2h values
+    :param rows: list of all rows in data d
+    """
+    d2h_list = []
+    for row in rows:
+        d2h_list.append(row.d2h(d))
+    return d2h_list
+
+def print_ranking_analysis(d, ceiling, std):
+    """
+    Prints out the ranking analysis
+    """
+    print("Starting ranking analysis...")
+    # found date code at https://www.programiz.com/python-programming/datetime/current-datetime
+    today = date.today()
+    todays_date = today.strftime("%B %d, %Y")
+    print(f"Date : {todays_date}")  # print current date
+    print(f"File : {the.file}")  # print file name
+    print(f"Repeats : 20")  # print the number of repetitions(num of times we run bonr15
+    # when building our sampling group for example)
+    print(f"Seed : {the.seed}")
+    print(f"Rows : {len(d.rows)}")
+    print(f"Columns : {len(d.cols.all)}")
+    print(f"Best : {ceiling}")  #
+    print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
+
 def _run(t_name):
     if t_name in tests:
         return tests[t_name]()
@@ -569,4 +568,4 @@ if __name__ == '__main__':
     #gate20()
     #test_d2h2()
     #test_bonr_better_than_base()
-    test_ranking_stats_smo()
+    smo_exp()
