@@ -1,6 +1,6 @@
 # Automated Software Engineering - Homework
 ![Python](https://img.shields.io/badge/python-v3.10+-brightgreen.svg)
-![Lines of code](https://img.shields.io/tokei/lines/github/ExtremeMachine12/ase-spring24-team/hw1)
+![Lines of code](https://img.shields.io/tokei/lines/github/ExtremeMachine12/ase-spring24-team)
 
 ## Quick Guide
 To run use the following commands:
