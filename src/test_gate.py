@@ -12,6 +12,7 @@ from util import norm, rnd
 import util as l
 from the import THE, the, SLOTS
 import random
+from statistics import mean
 
 tests = {}
 
@@ -516,8 +517,31 @@ def test_ranking_stats_smo():
         Sample.SAMPLE(base_line_list, "base"),
     ])
 
-    # base #bonr9 #rand9 #bonr15 #rand15 #bonr20 #rand20 #rand358
-    # report8
+def test_bonr_better_than_base():
+    """
+    This test checks to make sure that bonr is outperforming the baseline
+    """
+    d = Data(the.file)  # just set d for easy use in print statements
+    bonr9_best_list = []  # the list of 20 best bonr9 value
+    bonr15_best_list = []
+    bonr20_best_list = []
+    for i in range(50):
+        # iterate 50 times
+        bonr9_best_list.append(get_best_bonr(9))  # calls to a function that runs data for bonr9
+        # and returns the best value once
+        bonr15_best_list.append(get_best_bonr(15))
+        bonr20_best_list.append(get_best_bonr(20))
+    base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
+    base_line_d2h = mean(base_line_list)
+    # loop through all bonr9 computed values and compare to baseline value
+    # it should hopefully be the case that the baseline is always worse, otherwise we might have
+    # changed the code too much
+    for d2h_val in bonr9_best_list:
+        assert d2h_val < base_line_d2h
+    for d2h_val in bonr15_best_list:
+        assert d2h_val < base_line_d2h
+    for d2h_val in bonr20_best_list:
+        assert d2h_val < base_line_d2h
 
 def _run(t_name):
     if t_name in tests:
@@ -539,4 +563,5 @@ if __name__ == '__main__':
     #test_best_less_than_rest()
     #gate20()
     #test_d2h2()
+    #test_bonr_better_than_base()
     test_ranking_stats_smo()
