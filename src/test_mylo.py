@@ -4,10 +4,12 @@ Examples class -- essentially just the testing mylo related functions
 """
 from the import THE, the, SLOTS
 from Data import Data
+from Sample import SAMPLE
 from Num import Num
 from Sym import Sym
 from Node import Node
 import util as l
+import sys, random
 
 tests = {}
 
@@ -206,6 +208,22 @@ def test_node_init():
     assert node.lefts is None
     assert node.rights is None
 
+def test_sample():
+    """
+    Tests that all of the attributes of the sample class are calculated correctly
+    """
+    sample = SAMPLE([0.34, 0.49 ,0.51, 0.6])
+    assert type(sample.has) == type([])
+    assert sample.ready == False
+    assert sample.txt == ""
+    assert sample.rank == 0
+    assert sample.n == 4
+    assert round(sample.sd, 2) == 0.11
+    assert round(sample.m2, 2) == 0.03
+    assert round(sample.mu, 2) == 0.49
+    assert round(sample.lo, 2) == 0.34
+    assert round(sample.hi, 2) == 0.6
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -220,5 +238,6 @@ def _run(t_name):
 
 if __name__ == '__main__':
     #all()
+    test_sample()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95, "seed":31210}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...

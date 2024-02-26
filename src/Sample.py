@@ -166,5 +166,5 @@ def eg4(n=5):
 
 if __name__ == "__main__":
   random.seed(1)
-  # eg1()
-  egSlurp()
+  eg3()
+  # egSlurp()
