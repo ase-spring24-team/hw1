@@ -443,7 +443,7 @@ def test_likes():
             print(k,m)
             print()
 
-def test_ranking_stats_smo():
+def smo_ranking_stats():
     """
     Runs smo bonr and rand and assembles groups of best solutions based on these runs, then
     it stratifies each group into rankings to see if each group is significantly different from
@@ -455,7 +455,6 @@ def test_ranking_stats_smo():
     # Now we must sort all rows based on the distance to heaven to get our ceiling
     all_rows.sort(key=lambda x: x.d2h(d))
     ceiling = l.rnd(all_rows[0].d2h(d))  # set ceiling value to best value
-    print(f"Best : {ceiling}")  #
     bonr9_best_list = []  # the list of 20 best bonr9 value
     rand9_best_list = []  # the list of 20 best rand9 value
     bonr15_best_list = []
@@ -463,6 +462,7 @@ def test_ranking_stats_smo():
     bonr20_best_list = []
     rand20_best_list = []
     rand358_best_list = []
+    print("Calculating Best and Tiny...")
     for i in range(20):
         # iterate our 20 times
         bonr9_best_list.append(get_best_bonr(9))  # calls to a function that runs data for bonr9
@@ -475,7 +475,8 @@ def test_ranking_stats_smo():
         rand20_best_list.append(get_best_rand(20))
         rand358_best_list.append(get_best_rand(358))
     base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
-    std = stdev(base_line_list)  # standard deviation of all rows d2h values    
+    std = stdev(base_line_list)  # standard deviation of all rows d2h values  
+    print(f"Best : {ceiling}")  #  
     print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
     print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
