@@ -155,6 +155,18 @@ To run Double Tap:
 python mylo.py -t double_tap  
 ```
 
+### HW6 (Week 8)
+#### Part 1
+To run the smo experiment (no stats):
+```
+python gate.py -t smo_exp
+```
+#### Part 2
+To run the smo experiment (ranking stats):
+```
+python gate.py -t smo_ranking_stats
+```
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
