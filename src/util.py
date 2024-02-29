@@ -74,3 +74,25 @@ def o(x):
         return x.__class__.__name__ +"{"+ (" ".join([f"{k}:{v}" for k,v in sorted(x.items()) if k[0]!="_"]))+"}"
     else:
         return x.__class__.__name__ +"{"+ (" ".join([f"{k}:{v}" for k,v in sorted(vars(x).items()) if k[0]!="_"]))+"}"
+    
+
+def entropy(t):
+    n, e = 0, 0
+    for _, v in t.items():
+        n += v 
+    for _, v in t.items():
+        e = e-v/n * math.log(v/n, 2)
+    return e, n
+
+def score(t, goal, LIKE, HATE):
+    like, hate, tiny = 0, 0, 1E-30
+    for klass, n in t.items():
+        if klass == goal:
+            like += n
+        else:
+            hate += n 
+    like, hate = like / (LIKE + tiny), hate / (HATE + tiny)
+    if hate > like :
+        return 0
+    else:
+        return like ** 2 / (like + hate)
