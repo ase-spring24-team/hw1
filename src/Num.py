@@ -3,7 +3,7 @@ File by Sai Raj Thirumalai
 This file is our Num class, which will contain the numeric data
 """
 import math
-
+from the import the
 
 class Num:
     def __init__(self, s=" ", n=0):
@@ -93,5 +93,5 @@ class Num:
         Discretization of our NUM
         """
         tmp = (self.hi - self.lo)/(the.bins-1)
-        return 1 if self.hi == self.lo else math.floor(x/tmp + .5)*tmp
+        return 1 if self.hi == self.lo else int(math.floor(x/tmp + .5)*tmp)
 

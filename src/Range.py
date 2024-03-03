@@ -17,8 +17,9 @@ class Range:
         """
         self.txt = txt
         self.at = at
-        self.x = { lo: lo, hi : hi if hi else lo}
-        self.y = defaultdict(int)
+        self.scored =0
+        self.x = { "lo": lo, "hi" : hi if hi else lo}
+        self.y = {}
 
     def add(self, x, y):
         """
@@ -27,7 +28,7 @@ class Range:
         """
         self.x["lo"] = min(self.x["lo"], x)
         self.x["hi"] = min(self.x["hi"], x)
-        self.y[y] = self.y[y] + 1 
+        self.y[y] = (self.y[y] if y in self.y else 0) + 1 
 
     def show(self):
         """
@@ -58,12 +59,10 @@ class Range:
         both = Range(self.at, self.txt, self.x["lo"])
         both.x["lo"] = min(self.x["lo"], other.x["lo"])
         both.x["hi"] = max(self.x["hi"], other.x["hi"])
-        for _, t in self.y.items():
-            for k, v in enumerate(t):
-                both.y[k] = both.y[k] + v 
-        for _, t in other.y.items():
-            for k, v in enumerate(t):
-                both.y[k] = both.y[k] + v 
+        for k, v in self.y.items():
+            both.y[k] = (both.y[k] if k in both.y else 0) + v 
+        for k, v in other.y.items():
+            both.y[k] = (both.y[k] if k in both.y else 0) + v 
         return both
     
     def merged(self, other, toofew):
@@ -76,7 +75,7 @@ class Range:
         e2, n2 = l.entropy(other.y)
         if n1 <= toofew or n2 <= toofew:
             return both
-        if l.entropy(both.y) <= (n1*e1 + n2*e2) / (n1+n2):
+        if l.entropy(both.y)[0] <= (n1*e1 + n2*e2) / (n1+n2):
             return both
 
 def _ranges1(col, rowss):
