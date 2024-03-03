@@ -5,6 +5,8 @@ This file is our Range class, distinguish sets of rows (stored in `rowss`)
 
 from collections import defaultdict
 import util as l
+from Sym import Sym
+from the import the
 
 class Range:
     def __init__(self, at, txt, lo, hi = None):
@@ -76,4 +78,38 @@ class Range:
             return both
         if l.entropy(both.y) <= (n1*e1 + n2*e2) / (n1+n2):
             return both
+
+def _ranges1(col, rowss):
+    out, nrows = {}, 0
+    for (y, rows) in rowss.items():
+        nrows = nrows + len(rows)
+        for row in rows:
+            x = row.cells[col.at]
+            if x != "?":
+                bin = col.bin(x)
+                if bin not in out:
+                    out[bin] = Range(col.at, col.txt, x)
+                out[bin].add(x, y)
+    out = list(out.values())
+    out.sort(key=lambda a: a.x["lo"])
+    return out if isinstance(col, Sym) else _mergeds(out, nrows/the.bins)
+
+def _mergeds(ranges, tooFew):
+    i, t  = 0, []
+    while i < len(ranges):
+        a = ranges[i]
+        if i < len(ranges) - 1:
+            both = a.merged(ranges[i+1], tooFew)
+            if both:
+                a = both
+                i += 1
+        t.append(a)
+        i += 1
+    if len(t) < len(ranges):
+        return _mergeds(t, tooFew)
+    for i in range(1, len(t)):
+        t[i].x["lo"] = t[i-1].x["hi"]
+    t[0].x["lo"] = float("-inf")
+    t[-1].x["hi"] = float("inf")
+    return t
 
