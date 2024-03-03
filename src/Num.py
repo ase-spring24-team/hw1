@@ -88,3 +88,10 @@ class Num:
             y = 1 if x < .5 else 0
         return abs(x-y)
 
+    def bin(self, x):
+        """
+        Discretization of our NUM
+        """
+        tmp = (self.hi - self.lo)/(the.bins-1)
+        return 1 if self.hi == self.lo else math.floor(x/tmp + .5)*tmp
+

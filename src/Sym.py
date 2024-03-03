@@ -74,3 +74,10 @@ class Sym:
             # if either values is unknown
             return 1  # return a maximum distance of 1
         return 1 if x != y else 0
+
+    def bin(self, x):
+        """
+        Function that discretizes a Sym, however, symbols are binned by exactly what they are
+        unlike numbers, so just return the sym
+        """
+        return x

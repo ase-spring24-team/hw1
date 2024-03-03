@@ -224,6 +224,40 @@ def test_sample():
     assert round(sample.lo, 2) == 0.34
     assert round(sample.hi, 2) == 0.6
 
+
+def bins():
+    """
+    This function discretizes our rows into seperate bins and then prints some of them
+    """
+    d = Data("../data/auto93.csv")
+    best, rest, evals = d.branch()  #included eval as not to cause an error (since branch
+    # returns 3 values not only 2)
+    LIKE = best.rows
+    HATE = random.sample(rest.rows, 3*len(LIKE))
+    rowss = {"LIKE": LIKE, "HATE": HATE}
+    def score(range):
+        """
+        Calculates the score based on the goal class for a specific range
+        """
+        return range.score("LIKE", len(LIKE), len(HATE)) # send goal klass, number of likes, and
+        # number of hates
+    t = []
+    for col in d.cols.x:
+        # iterate through the indpendent variable names
+        print("")
+        for range in _ranges1(col, rowss):
+            # iterate through all the possible ranges
+            print(range)
+            t.append(range) # this might be wrong... double check this later
+    t = sorted(t, key=lambda range_x: score(range_x))  # sort the list t by each ranges score value
+    max = score(t[0])  # of the newly sorted list, index 0 is now the range with the max score
+    print("\n#scores:\n")
+    for range in t[0:the.Beam]:
+        if score(range) > max * .1:
+            print(l.rnd(score(range)), range)
+    print(rowss)  #print out the #of Likes and hates
+
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -238,6 +272,7 @@ def _run(t_name):
 
 if __name__ == '__main__':
     #all()
-    test_sample()
-    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95, "seed":31210}))
+    #test_sample()
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95, "seed":31210, "Beam":10}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...
+    bins()
