@@ -79,6 +79,9 @@ To get the stats:
 ```
  python gate.py -f ../data/auto93.csv -t stats
 ```
+
+##### Output Directory: [hw/w2](hw/w2)
+
 ### HW3 (Week 3)
 #### Task 1
 To print the little ascii table:
@@ -99,12 +102,17 @@ python gate.py -t km
 - Recommended low frequency settings for `soybean.csv` are `k=2` and `m=1`, as they return the best accuracy of 85%.
 - Accuracy of 73% is obtained on `diabetes.csv` for low frequency settings `k ∈ {0,1,2,3}` and `m ∈ {0,1,2,3}`
 
+##### Output Directory: [hw/w3](hw/w3)
+
 ### HW4 (Week 4)
 To execute the SMO using gate function 20 times:
 ```
 python gate.py -t gate20
 ```
 The output files are stored in `hw/w4` directory
+
+##### Output Directory: [hw/w4](hw/w4)
+
 #### Question 1
 Does SMO do better than the random baselines?
 
@@ -137,8 +145,9 @@ To run the 'Far' using fastmap heuristic:
 ```
 python mylo.py -t far  
 ```
+##### Output Directory: [hw/w5](hw/w5)
 
-### HW5 (Week 7)
+### HW6 (Week 7)
 #### Task 1
 To run the Recursive random projections to generate Clusters:
 ```
@@ -154,8 +163,9 @@ To run Double Tap:
 ```
 python mylo.py -t double_tap  
 ```
+##### Output Directory: [hw/w7-hw6](hw/w7-hw6)
 
-### HW6 (Week 8)
+### HW7 (Week 8)
 #### Part 1
 To run the smo experiment (no stats):
 ```
@@ -166,6 +176,7 @@ To run the smo experiment (ranking stats):
 ```
 python gate.py -t smo_ranking_stats
 ```
+##### Output Directory: [hw/w8-hw7](hw/w8-hw7)
 
 ## Team members:
 
