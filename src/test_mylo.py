@@ -9,6 +9,7 @@ from Num import Num
 from Sym import Sym
 from Node import Node
 import util as l
+from Range import _ranges1
 import sys, random
 
 tests = {}
@@ -242,20 +243,22 @@ def bins():
         return range.score("LIKE", len(LIKE), len(HATE)) # send goal klass, number of likes, and
         # number of hates
     t = []
+    print("OUTPUT1:")
     for col in d.cols.x:
         # iterate through the indpendent variable names
         print("")
         for range in _ranges1(col, rowss):
             # iterate through all the possible ranges
-            print(range)
+            print(l.o(range))
             t.append(range) # this might be wrong... double check this later
-    t = sorted(t, key=lambda range_x: score(range_x))  # sort the list t by each ranges score value
+    t = sorted(t, key=lambda range_x: score(range_x), reverse=True)  # sort the list t by each ranges score value
     max = score(t[0])  # of the newly sorted list, index 0 is now the range with the max score
+    print("\n\nOUTPUT2:")
     print("\n#scores:\n")
     for range in t[0:the.Beam]:
         if score(range) > max * .1:
-            print(l.rnd(score(range)), range)
-    print(rowss)  #print out the #of Likes and hates
+            print(l.rnd(score(range)), l.o(range))
+    print({"LIKE": len(LIKE), "HATE": len(HATE)})  #print out the #of Likes and hates
 
 
 # function to automatically load all functions in this module in test variable
