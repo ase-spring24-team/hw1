@@ -5,6 +5,7 @@ Examples class -- essentially just the testing mylo related functions
 from the import THE, the, SLOTS
 from Data import Data
 from Sample import SAMPLE
+from Range import Range
 from Num import Num
 from Sym import Sym
 from Node import Node
@@ -244,6 +245,18 @@ def test_sym_bin():
     b = e.bin("Cloudy")
     return b == "Cloudy"
 
+def test_range():
+    """
+    Tests whether all of the attributes of the sample class are initialized correctly
+    """
+    range = Range(0, "col1", 1)
+    assert range.at == 0
+    assert range.txt == "col1"
+    assert range.x["lo"] == 1
+    assert range.x["hi"] == 1
+    assert type(range.y) == type({})
+
+
 def bins():
     """
     This function discretizes our rows into separate bins and then prints some of them
@@ -299,4 +312,4 @@ if __name__ == '__main__':
     #test_sample()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "Far":.95, "seed":31210, "Beam":10, "bins":16}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...
-    bins()
+    test_range()
