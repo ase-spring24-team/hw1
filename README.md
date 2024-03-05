@@ -179,7 +179,6 @@ python gate.py -t smo_ranking_stats
 ##### Output Directory: [hw/w8-hw7](hw/w8-hw7)
 
 ### HW8 (Week 9)
-#### Task 1
 To run the Discretization:
 ```
 python .\mylo.py -t bins
