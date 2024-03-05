@@ -246,14 +246,17 @@ def test_sym_bin():
 
 def bins():
     """
-    This function discretizes our rows into seperate bins and then prints some of them
+    This function discretizes our rows into separate bins and then prints some of them
     """
     d = Data("../data/auto93.csv")
-    best, rest, evals = d.branch()  #included eval as not to cause an error (since branch
+    best, rest, evals = d.branch()  # included eval as not to cause an error (since branch
+    assert best.rows[0].d2h(d) < rest.rows[0].d2h(d)  # test that the best row is actually better
+    # than the best row in rest
     # returns 3 values not only 2)
     LIKE = best.rows
     HATE = random.sample(rest.rows, 3*len(LIKE))
     rowss = {"LIKE": LIKE, "HATE": HATE}
+    assert len(LIKE) < len(HATE)  # test that initially like has less rows than hate
     def score(range):
         """
         Calculates the score based on the goal class for a specific range
