@@ -178,6 +178,14 @@ python gate.py -t smo_ranking_stats
 ```
 ##### Output Directory: [hw/w8-hw7](hw/w8-hw7)
 
+### HW8 (Week 9)
+#### Task 1
+To run the Discretization:
+```
+python .\mylo.py -t bins
+```
+##### Output Directory: [hw/w9-hw8](hw/w9-hw8)
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
