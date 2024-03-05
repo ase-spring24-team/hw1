@@ -225,6 +225,24 @@ def test_sample():
     assert round(sample.lo, 2) == 0.34
     assert round(sample.hi, 2) == 0.6
 
+def test_num_bin():
+    e = Num()
+    for _ in range(1000):
+        e.add(l.norm(10, 2))
+    b = e.bin(10)
+    return b == 9
+
+def test_num_bin_2():
+    e = Num()
+    for _ in range(100):
+        e.add(l.norm(10, 2))
+    b = e.bin(15)
+    return b == 15
+
+def test_sym_bin():
+    e = Sym()
+    b = e.bin("Cloudy")
+    return b == "Cloudy"
 
 def bins():
     """
