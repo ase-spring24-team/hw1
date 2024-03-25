@@ -6,11 +6,12 @@ from the import THE, the, SLOTS
 from Data import Data
 from Sample import SAMPLE
 from Range import Range
+from Rules import Rules
 from Num import Num
 from Sym import Sym
 from Node import Node
 import util as l
-from Range import _ranges1
+from Range import _ranges, _ranges1
 import sys, random
 
 tests = {}
@@ -294,6 +295,23 @@ def bins():
             print(l.rnd(score(range)), l.o(range))
     print({"LIKE": len(LIKE), "HATE": len(HATE)})  #print out the #of Likes and hates
 
+def rules():
+    d = Data(the.file)
+
+    best0, rest, evals1 = d.branch(the.d)
+    best, _, evals2 = best0.branch(the.D)
+    print(evals1 + evals2 + the.D - 1)
+
+    LIKE = best.rows
+    HATE = random.sample(rest.rows, 3 * len(LIKE))
+    rowss = {"LIKE": LIKE, "HATE": HATE}
+
+    rules = Rules(_ranges(d.cols.x, rowss), "LIKE", rowss)
+    for rule in rules.sorted:
+        result = d.clone(rule.selects(rest.rows))
+        if len(result.rows) > 0:
+            result.rows.sort(key=lambda x: x.d2h(d))
+            print(l.rnd(rule.scored), l.rnd(result.mid().d2h(d)), l.rnd(result.rows[0].d2h(d)), l.o(result.mid().cells), "\t", rule.show())
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
@@ -310,7 +328,7 @@ def _run(t_name):
 if __name__ == '__main__':
     #all()
     #test_sample()
-    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256,
+    the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
                     "Far":.95, "seed":31210, "Beam":10, "bins":16, "Cut":.1}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...
-    test_range()
+    rules()

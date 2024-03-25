@@ -78,6 +78,13 @@ class Range:
         if l.entropy(both.y)[0] <= (n1*e1 + n2*e2) / (n1+n2):
             return both
 
+def _ranges(cols, rowss):
+    t = []
+    for col in cols:
+        for range in _ranges1(col, rowss):
+            t.append(range)
+    return t
+
 def _ranges1(col, rowss):
     out, nrows = {}, 0
     for (y, rows) in rowss.items():
