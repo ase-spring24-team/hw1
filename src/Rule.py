@@ -1,6 +1,6 @@
 """
 File by Sathiya Narayanan Venkatesan
-This file is our Range class, distinguish sets of rows (stored in `rowss`)
+This file is our Rule Class
 """
 
 import util as l
