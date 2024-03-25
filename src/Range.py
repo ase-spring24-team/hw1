@@ -13,7 +13,7 @@ class Range:
         """
         Initialization function for the Range class
         Sets up the column name, column index, range of x and range of y
-        :param s: column name, n: column index
+        :param txt: column name, at: column index, lo: start of the range, hi: end of the range
         """
         self.txt = txt
         self.at = at
