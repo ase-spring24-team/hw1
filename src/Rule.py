@@ -20,11 +20,11 @@ class Rule:
             self.parts[range.txt] = t
 
     def _or(self, ranges, row):
-        x = row.cells[ranges[1].at]
+        x = row.cells[ranges[0].at]
         if x == "?":
             return True
         for range in ranges:
-            lo, hi = range.x.lo, range.x.hi
+            lo, hi = range.x["lo"], range.x["hi"]
             if lo == hi if lo == x else lo <= x and x < hi:
                 return True
         return False
@@ -63,7 +63,7 @@ class Rule:
         if not ready:
             t = t.copy()
             t = sorted(t, key=lambda a, b : a.x.lo < b.x.lo)
-        i = 1
+        i = 0
         u = []
         while i <= len(t):
             a = t[i]

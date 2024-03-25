@@ -4,7 +4,7 @@ This is our Rules class. Notice the 's' at the end. This class manages the proce
 , trying all their combinations, scoring the combinations and returning the result
 """
 import util as l
-import Rule
+from Rule import Rule
 from the import the
 
 class Rules:
@@ -16,7 +16,7 @@ class Rules:
         :param rowss: a table that has the following key value pair structure:
         {"LIKE": [rows in best], "HATE": [3\*N of rest, selected at random]}
         """
-        self.sorted = {}
+        self.sorted = []
         self.goal = goal
         self.rowss = rowss
         self.LIKE = 0
@@ -58,7 +58,7 @@ class Rules:
         u = []
         for subset in l.powerset(ranges):
             if len(subset) > 0:
-                rule = Rule(subset)
+                rule = Rule(subset[:-1])
                 rule.scored = self.score(rule.selectss(self.rowss))
                 if rule.scored > 0.01:
                     u.append(rule)

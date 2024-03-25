@@ -88,6 +88,7 @@ def score(t, goal, LIKE, HATE):
     like, hate, tiny = 0, 0, 1E-30
     for klass, n in t.items():
         if klass == goal:
+            print(like, n)
             like += n
         else:
             hate += n 
@@ -102,8 +103,8 @@ def powerset(s):
     This function builds a powerset of ranges s(all possible subsets of ranges)
     :param s: a list of ranges s
     """
-    t = [[]]
-    for range in s:
+    t = [()]
+    for i in range(len(s)):
         for j in range(len(t)):
-            t.append(range + t[j])
+            t.append((s[i], t[j]))
     return t

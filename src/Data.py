@@ -183,8 +183,8 @@ class Data:
 
     def split(self, best, rest, lite, dark):
         selected = Data([self.cols.names])
-        max = 1E30
-        out = 1
+        max = -1E30
+        out = 0
         for (i, row) in enumerate(dark):
             b = row.like(best, len(lite), 2)
             r = row.like(rest, len(lite), 2)
