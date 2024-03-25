@@ -45,13 +45,13 @@ class Rule:
     def selectss(self, rowss):
         t = {}
         for y, rows in rowss.items():
-            t[y] = self.selects(rows)
+            t[y] = len(self.selects(rows))
         return t
 
     def show(self):
         ands = []
         for _, ranges in self.parts.items():
-            ors = self._showless(ranges)
+            ors = _showless(ranges)
             at = 0
             for i, range in enumerate(ors):
                 at = range.at
@@ -59,19 +59,20 @@ class Rule:
             ands.append(" or ".join(ors))
         return " and ".join(ands)
 
-    def _showless(self, t, ready = True):
-        if not ready:
-            t = t.copy()
-            t = sorted(t, key=lambda a, b : a.x.lo < b.x.lo)
-        i = 0
-        u = []
-        while i <= len(t):
-            a = t[i]
-            if i < len(t):
-                a = a.add(t[i+1])
+def _showless(t, ready = True):
+    if not ready:
+        t = t.copy()
+        t = sorted(t, key=lambda a, b : a.x.lo < b.x.lo)
+    i = 0
+    u = []
+    while i < len(t):
+        a = t[i]
+        if i < len(t) -1:
+            if a.x["hi"] == t[i+1].x["lo"]:
+                a = a.merge(t[i+1])
                 i += 1
-            u.append(a)
-            i += 1
-        return t if len(u) == len(t) else self._showless(u, ready)
+        u.append(a)
+        i += 1
+    return t if len(u) == len(t) else _showless(u, ready)
 
 

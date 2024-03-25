@@ -300,18 +300,20 @@ def rules():
 
     best0, rest, evals1 = d.branch(the.d)
     best, _, evals2 = best0.branch(the.D)
-    print(evals1 + evals2 + the.D - 1)
+    print("Evals:", evals1 + evals2 + the.D - 1)
 
     LIKE = best.rows
     HATE = random.sample(rest.rows, 3 * len(LIKE))
     rowss = {"LIKE": LIKE, "HATE": HATE}
 
     rules = Rules(_ranges(d.cols.x, rowss), "LIKE", rowss)
+
+    print("score\t", "mid:d2h", "row[0]:d2h\t", "mid selected\t\t\t\t\t\t", "rule")
     for rule in rules.sorted:
         result = d.clone(rule.selects(rest.rows))
         if len(result.rows) > 0:
             result.rows.sort(key=lambda x: x.d2h(d))
-            print(l.rnd(rule.scored), l.rnd(result.mid().d2h(d)), l.rnd(result.rows[0].d2h(d)), l.o(result.mid().cells), "\t", rule.show())
+            print(l.rnd(rule.scored), "\t", l.rnd(result.mid().d2h(d)), "\t", l.rnd(result.rows[0].d2h(d)),"\t\t", l.rnd_list(result.mid().cells), "\t", rule.show())
 
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):

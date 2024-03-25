@@ -36,9 +36,9 @@ class Range:
         prints the range based on the data
         """
         lo, hi, s = self.x["lo"], self.x["hi"], self.txt
-        if lo == int("-inf"):
+        if lo == float("-inf"):
             return " {} < {} ".format(s, hi)
-        if hi == int("inf"):
+        if hi == float("inf"):
             return " {} >= {} ".format(s, lo)
         if lo == hi:
             return " {} == {} ".format(s, lo)

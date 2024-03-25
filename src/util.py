@@ -88,7 +88,6 @@ def score(t, goal, LIKE, HATE):
     like, hate, tiny = 0, 0, 1E-30
     for klass, n in t.items():
         if klass == goal:
-            print(like, n)
             like += n
         else:
             hate += n 
@@ -96,7 +95,7 @@ def score(t, goal, LIKE, HATE):
     if hate > like :
         return 0
     else:
-        return like ** 2 / (like + hate)
+        return like ** 2 / (like + hate + tiny)
 
 def powerset(s):
     """
