@@ -102,8 +102,8 @@ def powerset(s):
     This function builds a powerset of ranges s(all possible subsets of ranges)
     :param s: a list of ranges s
     """
-    t = [()]
-    for i in range(len(s)):
+    t = [[]]
+    for x in s:
         for j in range(len(t)):
-            t.append((s[i], t[j]))
+            t.append([x] + t[j])
     return t

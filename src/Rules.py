@@ -58,7 +58,7 @@ class Rules:
         u = []
         for subset in l.powerset(ranges):
             if len(subset) > 0:
-                rule = Rule(subset[:-1])
+                rule = Rule(subset)
                 rule.scored = self.score(rule.selectss(self.rowss))
                 if rule.scored > 0.01:
                     u.append(rule)

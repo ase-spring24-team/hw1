@@ -315,6 +315,14 @@ def rules():
             result.rows.sort(key=lambda x: x.d2h(d))
             print(l.rnd(rule.scored), "\t", l.rnd(result.mid().d2h(d)), "\t", l.rnd(result.rows[0].d2h(d)),"\t\t", l.rnd_list(result.mid().cells), "\t", rule.show())
 
+def test_power_set():
+    """
+    Test case to ensure powerset is working correctly
+    """
+    li = [1,2,3]
+    li_powered  = l.powerset(li)
+    assert li_powered == [[], [1], [2], [2, 1], [3], [3, 1], [3, 2], [3, 2, 1]]
+
 # function to automatically load all functions in this module in test variable
 for (k, v) in list(locals().items()):
     if callable(v) and v.__module__ == __name__:
@@ -333,4 +341,5 @@ if __name__ == '__main__':
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
                     "Far":.95, "seed":31210, "Beam":10, "bins":16, "Cut":.1}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...
-    rules()
+    #rules()
+    test_power_set()
