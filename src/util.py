@@ -10,7 +10,7 @@ import random
 import math
 import fileinput
 from the import SLOTS
-
+from the import the
 
 def coerce(val):
     try:
@@ -95,7 +95,7 @@ def score(t, goal, LIKE, HATE):
     if hate > like :
         return 0
     else:
-        return like ** 2 / (like + hate + tiny)
+        return like ** the.Support / (like + hate + tiny)
 
 def powerset(s):
     """
