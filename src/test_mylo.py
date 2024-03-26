@@ -6,6 +6,7 @@ from the import THE, the, SLOTS
 from Data import Data
 from Sample import SAMPLE
 from Range import Range
+from Rule import Rule
 from Rules import Rules
 from Num import Num
 from Sym import Sym
@@ -248,7 +249,7 @@ def test_sym_bin():
 
 def test_range():
     """
-    Tests whether all of the attributes of the sample class are initialized correctly
+    Tests whether all of the attributes of the range class are initialized correctly
     """
     range = Range(0, "col1", 1)
     assert range.at == 0
@@ -256,6 +257,21 @@ def test_range():
     assert range.x["lo"] == 1
     assert range.x["hi"] == 1
     assert type(range.y) == type({})
+
+def test_rule():
+    """
+    Tests whether all of the attributes of the rule class are working correctly
+    """
+    rule = Rule([Range(0, "col1", 1)])
+    return "col1" in rule.parts
+    print(rule.show())
+
+def test_show():
+    """
+    Tests whether the show method of rule class is working correctly
+    """
+    rule = Rule([Range(0, "col1", 1)])
+    return rule.show() == " col1 == 1 "
 
 
 def bins():
