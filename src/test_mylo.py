@@ -296,7 +296,7 @@ def bins():
     print({"LIKE": len(LIKE), "HATE": len(HATE)})  #print out the #of Likes and hates
 
 def rules():
-    d = Data(the.file)
+    d = Data("../data/auto93.csv")
 
     best0, rest, evals1 = d.branch(the.d)
     best, _, evals2 = best0.branch(the.D)
@@ -313,7 +313,7 @@ def rules():
         result = d.clone(rule.selects(rest.rows))
         if len(result.rows) > 0:
             result.rows.sort(key=lambda x: x.d2h(d))
-            print(l.rnd(rule.scored), "\t", l.rnd(result.mid().d2h(d)), "\t", l.rnd(result.rows[0].d2h(d)),"\t\t", l.rnd_list(result.mid().cells), "\t", rule.show())
+            print(l.rnd(rule.scored), "\t", l.rnd(result.mid().d2h(d)), "\t", l.rnd(result.rows[0].d2h(d)),"\t\t", str(l.rnd_list(result.mid().cells)).ljust(50, " "), "\t", rule.show())
 
 def test_power_set():
     """
@@ -339,7 +339,7 @@ if __name__ == '__main__':
     #all()
     #test_sample()
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
-                    "Far":.95, "seed":31218, "Beam":10, "bins":16, "Cut":.1, "Support":2}))
+                    "Far":.95, "seed":31210, "Beam":10, "bins":16, "Cut":.1, "Support":2}))
     random.seed(the.seed)  # set the random seed so that tests are repeatable...
     rules()
-    test_power_set()
+    #test_power_set()
