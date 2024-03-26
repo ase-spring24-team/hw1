@@ -27,6 +27,8 @@ class Rules:
             print(key, len(rows))
 
         self.likeHate()
+        assert self.LIKE == len(rowss["LIKE"])
+        assert self.HATE == len(rowss["HATE"])
         for range in ranges:
             range.scored = self.score(range.y)
         self.sorted = self.top(self.trys(self.top(ranges)))
@@ -70,6 +72,8 @@ class Rules:
         :param t: the list of rules to sort and pull from
         """
         t.sort(key=lambda x: x.scored, reverse=True)  # sort in decending order
+        # test that are sort was correct
+        assert t[0].scored > t[-1].scored
         u = []
         for x in t:
             if x.scored >= t[0].scored * the.Cut:
