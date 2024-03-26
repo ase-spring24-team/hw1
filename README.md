@@ -185,6 +185,13 @@ python .\mylo.py -t bins
 ```
 ##### Output Directory: [hw/w9-hw8](hw/w9-hw8)
 
+### HW9 (Week 10)
+To run the Rules:
+```
+python .\mylo.py -t rules
+```
+##### Output Directory: [hw/w10-hw9](hw/w10-hw9)
+
 ## Team members:
 
 - Sai Raj Thirumalai (sthirum4)
