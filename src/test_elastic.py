@@ -35,7 +35,7 @@ def create_elastic_data_set(data_file):
             Y.append(row.cells[-amount_of_y_values:])
     X = np.array(X)
     Y = np.array(Y)
-
+    #hello
     regr = ElasticNet(random_state=0)
     regr.fit(X, Y)
     prediction_data_point = np.array([data.rows[-1].cells[:amount_of_x_values]])
