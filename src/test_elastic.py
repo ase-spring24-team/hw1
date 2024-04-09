@@ -27,15 +27,20 @@ def create_elastic_data_set(data_file):
     amount_of_y_values = len(data.cols.y)
     X = []  # will be our X list for inputs to our Elastic net
     Y = []
+    counter = 0
+    max = len(data.rows)/2
     for row in data.rows:
+        if counter > max:
+            break  # break out of the loop if we have trained the model on half the data
         x = row.cells[:amount_of_x_values]
         if "?" not in x:
             #  If we are missing a value in our x input, that will break our model
             X.append(x)
             Y.append(row.cells[-amount_of_y_values:])
+        counter += 1
     X = np.array(X)
     Y = np.array(Y)
-    #hello
+
     regr = ElasticNet(random_state=0)
     regr.fit(X, Y)
     prediction_data_point = np.array([data.rows[-1].cells[:amount_of_x_values]])
