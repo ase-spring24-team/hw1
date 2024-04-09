@@ -23,25 +23,26 @@ def create_elastic_data_set(data_file):
     and the y values are the predicted y values based on the input row (car in auto93)
     """
     data = Data(data_file)  # creates the data object
-    X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
-    # y = 1 * x_0 + 2 * x_1 + 3
-    y1, y2 = np.dot(X, np.array([1, 2])) + 3, np.dot(X, np.array([1, 2]))
-    print(y1)
-    y = np.concatenate((y1[:, np.newaxis], y2[:, np.newaxis]),
-                       axis=1)  # Concatenate y1 and y2 to form a 2D array
-    print(y.shape)
-    print(y)
+    amount_of_x_values = len(data.cols.x)
+    amount_of_y_values = len(data.cols.y)
+    X = []  # will be our X list for inputs to our Elastic net
+    Y = []
+    for row in data.rows:
+        x = row.cells[:amount_of_x_values]
+        if "?" not in x:
+            #  If we are missing a value in our x input, that will break our model
+            X.append(x)
+            Y.append(row.cells[-amount_of_y_values:])
+    X = np.array(X)
+    Y = np.array(Y)
+
     regr = ElasticNet(random_state=0)
-    regr.fit(X, y)
-    prediction2 = regr.predict(np.array([[3, 5]]))
-    reg = LinearRegression(fit_intercept=True, positive=False).fit(X, y)
-    reg.score(X, y)
-    reg.coef_
-    reg.intercept_
-    prediction = reg.predict(np.array([[3, 5]]))
-    print(f"Normal Linear Regression {prediction}")
+    regr.fit(X, Y)
+    prediction_data_point = np.array([data.rows[-1].cells[:amount_of_x_values]])
+    prediction2 = regr.predict(prediction_data_point)
+
     print(f"Elastic Net {prediction2}")
-    print(f"Real Answer {16}")
+    print(f"Real Answer {data.rows[-1].cells[-amount_of_y_values:]}")
 
 if __name__ == '__main__':
     the._set(SLOTS({"file":"../data/auto93.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
