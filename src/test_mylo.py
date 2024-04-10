@@ -171,7 +171,7 @@ def branch():
     print("evals:", evals)
 
 def double_tap():
-    d = Data("../data/auto93.csv")
+    d = Data(the.file)
     best1, rest, evals1 = d.branch(32)
     best2, _,    evals2 = best1.branch(4)
     print(l.rnd_list(best2.mid().cells), l.rnd_list(rest.mid().cells))
