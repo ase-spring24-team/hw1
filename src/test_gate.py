@@ -456,39 +456,51 @@ def smo_ranking_stats():
     all_rows.sort(key=lambda x: x.d2h(d))
     ceiling = l.rnd(all_rows[0].d2h(d))  # set ceiling value to best value
     bonr9_best_list = []  # the list of 20 best bonr9 value
+    rrp9_best_list = []  # the list of 20 best rrp9 values
     rand9_best_list = []  # the list of 20 best rand9 value
     bonr15_best_list = []
+    rrp15_best_list = []
     rand15_best_list = []
     bonr20_best_list = []
+    rrp20_best_list = []
     rand20_best_list = []
+    rrp_best_list = []
     rand358_best_list = []
     print("Calculating Best and Tiny...")
     for i in range(20):
         # iterate our 20 times
         bonr9_best_list.append(get_best_bonr(9))  # calls to a function that runs data for bonr9
         # and returns the best value once
+        rrp9_best_list.append(get_best_rrp(9))
         rand9_best_list.append(get_best_rand(9))  # calls to function which randomly samples
         # 9 rows from the data set and returns the best rows d2h
         bonr15_best_list.append(get_best_bonr(15))
+        rrp15_best_list.append(get_best_rrp(15))
         rand15_best_list.append(get_best_rand(15))
         bonr20_best_list.append(get_best_bonr(20))
+        rrp20_best_list.append(get_best_rrp(20))
         rand20_best_list.append(get_best_rand(20))
+        rrp_best_list.append(get_best_rrp())
         rand358_best_list.append(get_best_rand(358))
     base_line_list = get_base_line_list(d.rows, d)  # returns a list of all rows d2h values
     std = stdev(base_line_list)  # standard deviation of all rows d2h values  
     print(f"Best : {ceiling}")  #  
     print(f"Tiny : {l.rnd(.35*std)}")  # WE NEED to change this later...
 
-    print("base bonr9 rand9 bonr15 rand15 bonr20 rand20 rand358")
+    print("base bonr9 rrp9 rand9 bonr15 rand15 bonr20 rand20 rand358")
     print("Ranking Report: ")
     #  Below is the code that will actually stratify and print the different treatments
     Sample.eg0([
         Sample.SAMPLE(bonr9_best_list, "bonr9"),
+        Sample.SAMPLE(rrp9_best_list, "rrp9"),
         Sample.SAMPLE(rand9_best_list, "rand9"),
         Sample.SAMPLE(bonr15_best_list, "bonr15"),
+        Sample.SAMPLE(rrp15_best_list, "rrp15"),
         Sample.SAMPLE(rand15_best_list, "rand15"),
         Sample.SAMPLE(bonr20_best_list, "bonr20"),
+        Sample.SAMPLE(rrp20_best_list, "rrp20"),
         Sample.SAMPLE(rand20_best_list, "rand20"),
+        Sample.SAMPLE(rrp_best_list, "rrp"),
         Sample.SAMPLE(rand358_best_list, "rand358"),
         Sample.SAMPLE(base_line_list, "base"),
     ])
@@ -552,6 +564,16 @@ def get_best_bonr(num):
     assert best.d2h(d) <= _bests[0].d2h(d)  # Tests that we are getting the best value based on d2h
     # and not some other value by accident
     return l.rnd(best.d2h(d))
+
+def get_best_rrp(num=None):
+    """
+    Runs rrpN once and returns the best d2h value found
+    """
+    d = Data(the.file)
+    best, rest, evals = d.branch(num)  # num is the stop number (in regular rrp, the num is half
+    best.rows.sort(key=lambda x: x.d2h(d))
+    # the length of the data set
+    return l.rnd(best.rows[0].d2h(d))
 
 def get_best_rand(num):
     """

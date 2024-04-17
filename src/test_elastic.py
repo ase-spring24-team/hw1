@@ -4,6 +4,7 @@ This class represents
 """
 import csv
 import re
+import random
 import numpy as np
 from sklearn.linear_model import ElasticNet
 from the import THE, the, SLOTS
@@ -104,9 +105,9 @@ def create_elastic_data_set(data_file):
     """
 
 if __name__ == '__main__':
-    the._set(SLOTS({"file":"../data/Wine_quality_elasticnet_hyperparameters.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
+    the._set(SLOTS({"file":"../data/random_forest_hyperparameters_1.csv", "__help": "", "m":2, "k":1, "p":2, "Half":256, "d":32, "D":4,
                     "Far":.95, "seed":31210, "Beam":10, "bins":16, "Cut":.1, "Support":2}))
-
+    random.seed(the.seed)
     #call the function we want to run here
     #create_elastic_data_set("../data/Wine_quality.csv")
     #smo_exp()
